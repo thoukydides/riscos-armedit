@@ -1,0 +1,39 @@
+File        : module.txt
+Date        : 18-Apr-98
+Author      : © A.Thoukydides, 1995-1998, 2019
+Description : Description of the ARMEdit module.
+    
+License     : ARMEdit is free software: you can redistribute it and/or
+              modify it under the terms of the GNU General Public License
+              as published by the Free Software Foundation, either
+              version 3 of the License, or (at your option) any later
+              version.
+
+              ARMEdit is distributed in the hope that it will be useful,
+              but WITHOUT ANY WARRANTY; without even the implied warranty
+              of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+              the GNU General Public License for more details.
+
+              You should have received a copy of the GNU General Public
+              License along with ARMEdit. If not, see
+              <http://www.gnu.org/licenses/>.
+
+
+INTRODUCTION
+
+The ARMEdit module forms the core of the ARMEdit suite of software. It
+provides the communications between software running on the PC card and
+RISC OS.
+
+The module should normally be loaded after the desktop has been started, but
+before the PC front-end has been loaded. However, if Wimp$ScrapDir is set to
+a suitable value then the module may be loaded before the desktop has been
+entered. A good place for loading the ARMEdit module is in the !Run file of
+the PC front-end.
+
+The current version of this module will work with versions of the PC
+front-end software 1.87 and above. However, significantly better performance
+will be obtained if PCPro (!PC version 2.00 of higher) is used. The version
+number is displayed in the Info window from the icon-bar icon. See the
+Contacts documentation for details of how to obtain upgrades.
+

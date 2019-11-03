@@ -1,0 +1,213 @@
+#   File        : MakeFile
+#   Date        : 15-May-01
+#   Author      : © A.Thoukydides, 1995-2001, 2019
+#   Description : Makefile for the ARMEdit documentation.
+#
+#   License     : ARMEdit is free software: you can redistribute it and/or
+#                 modify it under the terms of the GNU General Public License
+#                 as published by the Free Software Foundation, either
+#                 version 3 of the License, or (at your option) any later
+#                 version.
+#
+#                 ARMEdit is distributed in the hope that it will be useful,
+#                 but WITHOUT ANY WARRANTY; without even the implied warranty
+#                 of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+#                 the GNU General Public License for more details.
+#
+#                 You should have received a copy of the GNU General Public
+#                 License along with ARMEdit. If not, see
+#                 <http://www.gnu.org/licenses/>.
+
+# Options
+DestDir         = ../!ARMEdit/Docs/
+Project         = Project
+Includes        = macros.hsc
+HSCFlags        = compact getsize mode=pedantic \
+                  rplcent rplcquote smartent status=quiet stripbadws \
+                  prjfile=$(Project) to=$(DestDir) $(Includes)
+
+# Fake target to build all pages
+all             : all_hsc
+
+# Copy files for the alternative formats
+.INIT           :
+                  @echo Starting build
+
+# Update dependencies
+.DONE           :
+                  @echo Updating dependencies
+                  @hscdepp file=MakeFile prjfile=$(Project)
+                  @echo Finished
+
+# Add a new file
+new             :
+                  @echo Adding $@
+                  @hsc $(HSCFlags) from=$(file).hsc
+
+# General rules
+.SUFFIXES       : .hsc .c++
+.hsc.html       :
+                  @echo Building $@
+                  @hsc $(HSCFlags) $<
+
+# Extra dependencies
+Release         : ../!ARMEdit/Docs/vers.html
+
+# --- DO NOT MODIFY THIS LINE -- hsc-dependencies follow ---
+
+# dependencies updated: Thursday 07-Jun-2001 18:44:38
+
+all_hsc : ../!ARMEdit/Docs/hpc/extyp.html ../!ARMEdit/Docs/hpc/typex.html \
+    ../!ARMEdit/Docs/hpc/fopen.html ../!ARMEdit/Docs/hpc/fclse.html \
+    ../!ARMEdit/Docs/hpc/fread.html ../!ARMEdit/Docs/hpc/fwrit.html \
+    ../!ARMEdit/Docs/hpc/tstrt.html ../!ARMEdit/Docs/hpc/tend.html \
+    ../!ARMEdit/Docs/hpc/ttx.html ../!ARMEdit/Docs/hpc/trx.html \
+    ../!ARMEdit/Docs/hpc/dinit.html ../!ARMEdit/Docs/hpc/dbpb.html \
+    ../!ARMEdit/Docs/hpc/dchgd.html ../!ARMEdit/Docs/hpc/dread.html \
+    ../!ARMEdit/Docs/hpc/dwrit.html ../!ARMEdit/Docs/hpc/dttdo.html \
+    ../!ARMEdit/Docs/hpc/dttro.html ../!ARMEdit/Docs/hpc/ostrt.html \
+    ../!ARMEdit/Docs/hpc/opoll.html ../!ARMEdit/Docs/hpc/oend.html \
+    ../!ARMEdit/Docs/hpc/trply.html ../!ARMEdit/Docs/hpc/fastr.html \
+    ../!ARMEdit/Docs/hpc/temp.html ../!ARMEdit/Docs/hpc/dlrd.html \
+    ../!ARMEdit/Docs/hpc/dlwrt.html ../!ARMEdit/Docs/hpc/dopen.html \
+    ../!ARMEdit/Docs/hpc/dclse.html ../!ARMEdit/Docs/hpc/drmvb.html \
+    ../!ARMEdit/Docs/hpc/index.html ../!ARMEdit/Docs/swi/index.html \
+    ../!ARMEdit/Docs/vers.html ../!ARMEdit/Docs/index.html \
+    ../!ARMEdit/Docs/swi/ctrl.html ../!ARMEdit/Docs/swi/hpc.html \
+    ../!ARMEdit/Docs/swi/poll.html ../!ARMEdit/Docs/swi/tack.html \
+    ../!ARMEdit/Docs/swi/tend.html ../!ARMEdit/Docs/swi/trply.html \
+    ../!ARMEdit/Docs/swi/ttx.html ../!ARMEdit/Docs/swi/tstrt.html \
+    ../!ARMEdit/Docs/command/index.html ../!ARMEdit/Docs/command/dev.html \
+    ../!ARMEdit/Docs/command/map.html ../!ARMEdit/Docs/command/ver.html \
+    ../!ARMEdit/Docs/swi/trx.html ../!ARMEdit/Docs/command/clnts.html \
+    ../!ARMEdit/Docs/command/devre.html ../!ARMEdit/Docs/command/poll.html \
+    ../!ARMEdit/Docs/command/mem.html ../!ARMEdit/Docs/command/files.html \
+    ../!ARMEdit/Docs/hpc/rc.html ../!ARMEdit/Docs/hpc/io.html \
+    ../!ARMEdit/Docs/xref.html ../!ARMEdit/Docs/cntnt.html \
+    ../!ARMEdit/Docs/hpc/swi.html ../!ARMEdit/Docs/hpc/read.html \
+    ../!ARMEdit/Docs/hpc/write.html ../!ARMEdit/Docs/hpc/alloc.html \
+    ../!ARMEdit/Docs/hpc/free.html
+
+../!ARMEdit/Docs/hpc/extyp.html : hpc/extyp.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/typex.html : hpc/typex.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/fopen.html : hpc/fopen.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/fclse.html : hpc/fclse.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/fread.html : hpc/fread.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/fwrit.html : hpc/fwrit.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/tstrt.html : hpc/tstrt.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/tend.html : hpc/tend.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/ttx.html : hpc/ttx.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/trx.html : hpc/trx.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/dinit.html : hpc/dinit.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/dbpb.html : hpc/dbpb.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/dchgd.html : hpc/dchgd.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/dread.html : hpc/dread.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/dwrit.html : hpc/dwrit.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/dttdo.html : hpc/dttdo.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/dttro.html : hpc/dttro.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/ostrt.html : hpc/ostrt.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/opoll.html : hpc/opoll.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/oend.html : hpc/oend.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/trply.html : hpc/trply.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/fastr.html : hpc/fastr.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/temp.html : hpc/temp.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/dlrd.html : hpc/dlrd.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/dlwrt.html : hpc/dlwrt.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/dopen.html : hpc/dopen.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/dclse.html : hpc/dclse.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/drmvb.html : hpc/drmvb.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/index.html : hpc/index.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/swi/index.html : swi/index.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/vers.html : vers.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/index.html : index.hsc brand.hsc macros.hsc Release
+
+../!ARMEdit/Docs/swi/ctrl.html : swi/ctrl.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/swi/hpc.html : swi/hpc.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/swi/poll.html : swi/poll.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/swi/tack.html : swi/tack.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/swi/tend.html : swi/tend.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/swi/trply.html : swi/trply.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/swi/ttx.html : swi/ttx.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/swi/tstrt.html : swi/tstrt.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/command/index.html : command/index.hsc brand.hsc \
+    macros.hsc
+
+../!ARMEdit/Docs/command/dev.html : command/dev.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/command/map.html : command/map.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/command/ver.html : command/ver.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/swi/trx.html : swi/trx.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/command/clnts.html : command/clnts.hsc brand.hsc \
+    macros.hsc
+
+../!ARMEdit/Docs/command/devre.html : command/devre.hsc brand.hsc \
+    macros.hsc
+
+../!ARMEdit/Docs/command/poll.html : command/poll.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/command/mem.html : command/mem.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/command/files.html : command/files.hsc brand.hsc \
+    macros.hsc
+
+../!ARMEdit/Docs/hpc/rc.html : hpc/rc.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/io.html : hpc/io.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/xref.html : xref.hsc brand.hsc macros.hsc database
+
+../!ARMEdit/Docs/cntnt.html : cntnt.hsc brand.hsc macros.hsc database
+
+../!ARMEdit/Docs/hpc/swi.html : hpc/swi.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/read.html : hpc/read.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/write.html : hpc/write.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/alloc.html : hpc/alloc.hsc brand.hsc macros.hsc
+
+../!ARMEdit/Docs/hpc/free.html : hpc/free.hsc brand.hsc macros.hsc
+
+# --- DO NOT MODIFY THIS LINE -- hsc-dependencies precede ---

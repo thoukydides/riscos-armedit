@@ -1,0 +1,41 @@
+The "ARMEdit" suite of software and documentation is supplied "as is"; no
+warranty, express or implied, of the merchantability of this software or its
+fitness for any particular purpose is given. In no circumstances shall the
+author, or any provider or distributor of this software, be liable for any
+damage, loss of profits, or any indirect or consequential loss arising out of
+the use of this software or inability to use this software.
+
+This software is FreeWare. Permission is granted for anyone to distribute it
+unchanged and in its entirety, providing that no profit is made in the
+process. The "ARMEdit" suite may not be distributed if modified or
+incomplete; neither may it be distributed without this documentation.
+However, the "Banner" application and "Ensure" utility may be used and
+distributed independently providing the terms in the relevant documentation
+file are complied with.
+
+The install option uses Info-ZIP's UnZip utility to extract files from an
+archive. Info-ZIP's software (Zip, UnZip and related utilities) is free and
+can be obtained as source code or executables from various sources. See the
+Docs.Contacts file for more details.
+
+This software uses CathLibCPP by Miles Sabin, which is copyright Â© 1997 Miles
+Sabin and contains code by the Hewlett-Packard Company:
+
+    Copyright Â© 1994
+    Hewlett-Packard Company
+      
+    Permission to use, copy, modify, distribute and sell this software and
+    its documentation for any purpose is hereby granted without fee, provided
+    that the above copyright notice appear in all copies and that both that
+    copyright notice and this permission notice appear in supporting
+    documentation. Hewlett-Packard Company makes no representations about the
+    suitability of this software for any purpose. It is provided "as is"
+    without express or implied warranty.
+
+To use this suite, or any part of it, as part of a system or other
+application that is for sale (for however much and for whatever reasons) or
+released as copyright material then the author's express permission in
+writing must be obtained. The author maintains copyright on all the material
+supplied, except as described above, and reserves the right to change these
+conditions at any time without notice.
+

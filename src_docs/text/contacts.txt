@@ -1,0 +1,244 @@
+File        : contacts.txt
+Date        : 16-May-98
+Author      : © A.Thoukydides, 1996-1998, 2019
+Description : Useful contact information relevant to ARMEdit.
+    
+License     : ARMEdit is free software: you can redistribute it and/or
+              modify it under the terms of the GNU General Public License
+              as published by the Free Software Foundation, either
+              version 3 of the License, or (at your option) any later
+              version.
+
+              ARMEdit is distributed in the hope that it will be useful,
+              but WITHOUT ANY WARRANTY; without even the implied warranty
+              of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+              the GNU General Public License for more details.
+
+              You should have received a copy of the GNU General Public
+              License along with ARMEdit. If not, see
+              <http://www.gnu.org/licenses/>.
+
+
+INTRODUCTION
+
+This file gives contact information relevant to ARMEdit. Please note that no
+responsibility is taken for the accuracy of details listed here; particulars
+may change without notice.
+
+
+CONTACTING THE AUTHOR
+
+I would be interested in hearing of any bugs or other unexpected features in
+this suite of software, and will endeavour to correct any such problems in
+future releases. Suggestions for improvements are also most welcome.
+Implementation depends upon practicability and on how much spare time I have.
+
+If you have any comments on ARMEdit, or would like to suggest ways in which
+it could be improved, I can be contacted at one of the following addresses:
+    
+    Thalna
+    2 Dukes Drive
+    Bearwood
+    Bournemouth
+    Dorset
+    BH11 9SZ
+    
+    armedit@thouky.tcp.co.uk
+
+If in any communication you make specific reference to the program code
+please:
+
+    Quote the version number and date of the ARMEdit module, the component
+    concerned, and the PC front-end software being used.
+    
+    Refer only to the software as released.
+    
+    Supply as many details as possible about the problem, including the
+    hardware and software configuration of the machine being used.
+
+Please send a stamped and self addressed envelope, or give details of how to
+contact via e-mail, if you would like a reply.
+
+
+ARMEDIT MAILING LIST
+
+Two mailing lists have been created for announcements and discussions
+concerning ARMEdit. These are:
+
+    armedit-announce    A moderated list for announcements of new beta-test
+                        or release versions.
+
+    armedit-chat        An unmoderated list for discussion of all aspects of
+                        ARMEdit, including:
+                        
+                            Problems with the software, e.g. bugs or
+                            interaction with other software.
+                            
+                            Ideas for improvements, or new applications of
+                            existing tools.
+                            
+                            Third party software being developed using the
+                            support included in ARMEdit.
+
+To join or remove yourself from either list email majordomo@thouky.tcp.co.uk
+with one of the following commands in the message body:
+
+    help                Obtain a summary of the supported commands.
+    
+    info <list>         Retrieve a description of the named list, where <list>
+                        should be either armedit-announce or armedit-chat.   
+    
+    list                List all the current mailing lists on the server,
+                        whether they are moderated or closed, and whether
+                        they are secure.
+
+    subscribe <list>    Subscribe to the named list, where <list> should
+                        again be either armedit-announce or armedit-chat.
+                        
+    unsubscribe <list>  Unsubscribe from the named list, where <list> should
+                        again be either armedit-announce or armedit-chat.
+    
+    which               List all the mailing lists subscribed to which you
+                        are currently subscribed.
+
+Please note that the commands must be place in the body of the message, not
+the subject.
+
+
+ARMEDIT UPGRADES
+
+A WWW page giving information about the current version of ARMEdit, links to
+copies available for download, and details of future developments, exists at:
+
+    http://homepages.tcp.co.uk/~thouky/tcfa.html
+
+Upgrades will normally be available from:
+
+    ftp://tailor.linc.ox.ac.uk/pub/alex/
+
+
+TOOLBOX MODULES
+
+The !ARMEdit front-end requires copies of the Acorn Toolbox modules. These
+are already present in RISC OS 3.6 and above, but must be placed in the
+!System directory on older machines. A copy may be downloaded from one of the
+following locations:
+
+    ftp://tailor.linc.ox.ac.uk/pub/alex/toolbox.arc
+    ftp://ftp.aleph1.co.uk/aleph1/toolbox.arc
+
+
+PC CARD SOFTWARE UPGRADES
+
+At the time of writing, the latest available release version of the software
+for second processor cards is PCPro 2v03. This is a free upgrade for owners
+of Aleph One cards, but is available for Acorn PC card owners to buy; contact
+Aleph One for more details:
+
+    Aleph One Ltd
+    The Old Courthouse
+    High Street
+    Bottisham
+    Cambridge
+    CB5 9BA
+    
+    Tel: 01223 811679
+    Fax: 01223 812713
+
+    sales@aleph1.co.uk
+    http://www.aleph1.co.uk/
+
+Free upgrades for Aleph One PC cards can be found at the Aleph One FTP site,
+including a beta-release version containing many of the features of PCPro:
+
+    ftp://ftp.aleph1.co.uk/aleph1/
+
+Equivalent upgrades for Acorn cards can be found at the Acorn FTP site:
+
+    ftp://ftp.acorn.co.uk/
+
+
+VIRTUALISE
+
+ARMEdit can use a lot of memory if the ARMEDIT.SYS device driver is being
+used. On a RiscPC it is possible to use my virtual memory manager Virtualise,
+available from Clares, to reduce the amount of RAM required:
+
+    Clares Micro Supplies
+    98 Middlewich Road
+    Rudheath
+    Northwich
+    Cheshire
+    
+    Tel: 01606 48511
+    Fax: 01606 48512
+    
+    sales@clares.demon.co.uk
+    http://www.stcoll.ac.uk/clares/
+
+
+WIN95FS
+
+Warm Silence Software have produced a partial replacement for DOSFS that
+provides access to files and directories via their Windows 95 long filenames.
+This is a perfect complement to the support provided by ARMEDIT.SYS.
+
+    Warm Silence Software
+    P.O. Box 28
+    Woodstock
+    Oxfordshire
+    England
+    OX15 4JX
+
+    Tel: 0585 487642
+    Fax: 01608 737172
+
+    Robin.Watts@wss.co.uk or Paul.Gardiner@wss.co.uk
+    http://www.wss.co.uk/
+
+
+INFO-ZIP
+
+The UnZip utility used by the install option is part of a suite of free
+compression software by Info-ZIP. The source code and other utilities may be
+obtained from:
+
+    ftp://ftp.cdrom.com/pub/infozip/
+    http://www.cdrom.com/pub/infozip/
+
+The RISC OS port is by Sergio Monesi and Karl 'RiscMan' Davis:
+
+    Sergio Monesi                       
+    Via Trento e Trieste 30             
+    20046 Biassono (MI)                 
+    Italy                               
+
+    msergio@tin.it
+    http://bounce.to/sergio/
+    
+    Karl 'RiscMan' Davis
+    PO Box B23
+    Boronia Park 2111
+    Australia
+    
+    riscman@armature.net.au
+    http://www.armature.net.au/~riscman/
+
+
+ZIP FAQ
+
+David Robinson maintains a very useful web page giving guidance on using Zip
+drives with PC cards. This includes a helpful section on installing both
+ARMEdit and a Zip drive on the same system. It may be accessed at:
+
+    http://www.zephryus.demon.co.uk/education/software/index.html
+
+
+CATHLIBCPP
+
+Miles Sabin has developed an implementation of the Standard C++ Library for
+use with Acorn's C++ compiler. This library has been used in the !ARMEdit
+front-end application. It may be obtained from:
+
+    http://www.acorn.com/associates/caug/cathlib/
+    

@@ -1,0 +1,205 @@
+File        : oscli.txt
+Date        : 18-Apr-98
+Author      : © A.Thoukydides, 1995-1998, 2019
+Description : Description of the PC OSCLI command that is part of the ARMEdit
+              suite.
+    
+License     : ARMEdit is free software: you can redistribute it and/or
+              modify it under the terms of the GNU General Public License
+              as published by the Free Software Foundation, either
+              version 3 of the License, or (at your option) any later
+              version.
+
+              ARMEdit is distributed in the hope that it will be useful,
+              but WITHOUT ANY WARRANTY; without even the implied warranty
+              of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+              the GNU General Public License for more details.
+
+              You should have received a copy of the GNU General Public
+              License along with ARMEdit. If not, see
+              <http://www.gnu.org/licenses/>.
+
+
+INTRODUCTION
+
+The "OSCLI" command allows RISC OS *commands to be executed from the DOS
+command line. To use this command it is necessary to load the ARMEdit module
+before starting the PC front-end.
+
+
+USAGE
+
+The syntax is:
+
+    OSCLI [/?] [/I|/S|/T] [/R] [<Command>]
+
+where
+
+    /?          - Displays some help text.
+    /I          - Redirects both input and output streams through DOS.
+    /S          - Prevents redirection of output through DOS.
+    /T          - Executes the command in a RISC OS TaskWindow.
+    /R          - Disable processing of VDU codes in the output.
+    <Command>   - The command to execute.
+
+Note that to prevent DOS from changing the command it is a good idea to place
+it in quotation marks. If no command is specified then shell mode is entered;
+just press Return at the * prompt without entering any other characters on
+the line to exit.
+
+Due to the way in which this command operates, strange behaviour can
+sometimes be produced. Some RISC OS commands can cause the computer to crash,
+so be careful with it. In particular, except for the TaskWindow option, the
+commands are executed within the environment of the PC front-end, so
+applications (including BASIC) must not be started.
+
+The "/T" switch attempts to start a RISC OS TaskWindow to execute the
+command; this requires !ARMEdit to be running. This option has the advantage
+that almost any command that can be used in an !Edit TaskWindow may be used,
+including running other applications or starting the BASIC interpreter.
+
+Another point to note is that commands that require action to be taken by a
+WIMP task, such as Filer_Run will not take effect until the PC enters
+multitasking mode.
+
+
+REDIRECTION
+
+Many *commands perform either input or output. By default the OSCLI command
+redirects the output of the command being executed to a RISC OS file before
+passing it to the DOS standard output. This allows, for example, piping to
+the MORE filter. To prevent this behaviour it is possible to specify the "/S"
+switch.
+
+Some commands require interactive input and output, such as *Build or *Count.
+Specifying the "/I" switch allows use of these commands by attaching both the
+input and output of the command to the standard DOS streams. This requires
+the command to be frequently suspended to allow input and output to be
+processed, so it can appear slightly slower. It may also have problems with
+some commands that work without the "/I" switch.
+
+
+SHELL MODE
+
+Using the OSCLI command without specifying a *command causes a shell mode to
+be entered. This is similar to the command line that can be obtained from the
+RISC OS desktop by pressing F12; a sequence of commands may be typed, ended
+by pressing Return on a line by itself.
+
+Unless the "/R" switch is used, a relatively simple command line history
+function is provided. The following keys may be used:
+
+    Ctrl-A or Home          Move the cursor to the start of the current line.
+    
+    Ctrl-B or Left          Move the cursor left one character.
+    
+    Ctrl-D or Delete        Delete the character to the right.
+    
+    Ctrl-E or End           Move the cursor to the end of the current line.
+    
+    Ctrl-F or Right         Move the cursor right one character.
+    
+    Ctrl-H or Backspace     Delete the character to the left.
+    
+    Ctrl-K                  Delete all characters to the end of the line.
+    
+    Ctrl-M or Return        Execute the current command.
+    
+    Ctrl-N or Down          Move to the next entry in the history list.
+    
+    Ctrl-P or Up            Move to the previous entry in the history list.
+    
+    Ctrl-T                  Transpose two characters.
+    
+    Ctrl-U or Escape        Clear the current line.
+    
+    Ctrl-Left               Move the cursor left one word.
+    
+    Ctrl-Right              Move the cursor right one word.
+    
+    Insert                  Toggle insert or overwrite mode.
+
+These are similar to the default assignments used by Oliver Betts' RISC OS
+LineEditor module.
+
+
+VDU CODES
+
+The output from some commands include RISC OS VDU codes. When output from the
+OSCLI command is directed to the DOS screen (as is normal) and the "/R"
+switch is not used then some of these codes are processed:
+
+    VDU 6   Enable screen output. This cancels the effect of VDU 21.
+
+    VDU 7   Ring the terminal bell, i.e. produce a beep.
+
+    VDU 8   Backspace the cursor. This moves the cursor back one character
+            position.
+    
+    VDU 9   Horizontal tab. This advances the cursor one character position.
+    
+    VDU 10  Linefeed. This moves the cursor to the same position on the next
+            line.
+    
+    VDU 11  Vertical tab. This moves the cursor to the same position on the
+            previous line.
+
+    VDU 12  Clear the current screen or text window if one defined.
+
+    VDU 13  Carriage return. This moves the cursor to the start of the
+            current line.
+
+    VDU 17  Set either the foreground or background the text colour. This
+            attempts to choose the closest DOS text screen colour to the one
+            specified. The default RISC OS palette is assumed.
+
+    VDU 20  Restore the default colours. This selects white text on a black
+            background.
+
+    VDU 21  Disable the screen display. All output is skipped until a VDU 6
+            code is reached.
+
+    VDU 22  Change the display mode. This clears the screen, clears any text
+            window and restores the default colours. An attempt is made to
+            use the closest DOS text mode to the requested RISC OS mode. This
+            also affects the mapping of text colours for VDU 17.
+
+    VDU 23  This encompasses a wide selection of possible operations. Only
+            some of these are supported:
+            
+                VDU 23, 0   Control the text cursor appearance. This allows
+                            the cursor to be switched off or changed into a
+                            solid block.
+            
+                VDU 23, 1   Control the appearance of the text cursor. This
+                            allows the cursor to be switched off or changed
+                            into a solid block.
+                
+                VDU 23, 7   Scroll either the current text window or the
+                            whole screen.
+                
+                VDU 23, 16  Control the movement of the cursor after
+                            printing. This allows the interpretation of
+                            horizontal and vertical movements to be changed.
+                
+                VDU 23, 17  Exchange the text foreground and background
+                            colours.
+                
+    VDU 26  Restore the default windows. This sets the text window to fill
+            the screen and places the cursor in the home position.
+
+    VDU 28  Define a text window. If the coordinates are in the wrong order
+            or lie outside the dimensions of the screen then this has no
+            effect.
+
+    VDU 30  Move the cursor to the home position. This is normally the
+            top-left corner of the current text window, but this may be
+            changed by VDU 23, 16.
+
+    VDU 31  Move the cursor to the specified coordinates. If the position
+            lies outside the current text window then this is ignored.
+
+Note that some of these operations may not work quite as expected, normally
+because the DOS screen does not exactly match the expected RISC OS mode, and
+no graphics operations are supported. There are also some other VDU sequences
+that have not been supported because they are rarely used.

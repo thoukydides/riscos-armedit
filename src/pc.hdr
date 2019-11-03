@@ -1,0 +1,384 @@
+;   File        : pc.hdr
+;   Date        : 15-May-01
+;   Authors     : © Aleph One Ltd, 1991-1996 
+;                 © A.Thoukydides, 1995-2000, 2019
+;   Description : Risc PC x86 card front-end software state structures.
+;
+;   License     : ARMEdit is free software: you can redistribute it and/or
+;                 modify it under the terms of the GNU General Public License
+;                 as published by the Free Software Foundation, either
+;                 version 3 of the License, or (at your option) any later
+;                 version.
+;
+;                 ARMEdit is distributed in the hope that it will be useful,
+;                 but WITHOUT ANY WARRANTY; without even the implied warranty
+;                 of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+;                 the GNU General Public License for more details.
+;
+;                 You should have received a copy of the GNU General Public
+;                 License along with ARMEdit. If not, see
+;                 <http://www.gnu.org/licenses/>.
+
+; Only include header file once
+
+        [       :LNOT::DEF:Hdr_pc
+        GBLS    Hdr_pc
+
+; Include oslib header files
+
+        GET     OS:Hdr.Types
+
+; Include my header files
+
+        GET     OS:Hdr.macros
+
+; Define constants
+
+        ; PC card events
+sys_event_hard_reset * 0
+sys_event_poll_chain * 2
+sys_event_shutdown  * 3
+sys_event_start_fe  * 4
+sys_event_stop_fe   * 5
+sys_event_start_win_fe * 6
+sys_event_stop_win_fe * 7
+sys_event_set_config * 8
+sys_event_gain_focus * 9
+sys_event_lose_focus * 10
+sys_event_connect_mouse * 11
+sys_events          * 16
+
+        ; PC card SVCs
+sys_svc_bios_init   * 0
+sys_svc_disk_int    * 1
+sys_svc_blk_drv     * 3
+sys_svc_chr_drv     * 4
+sys_svc_win_drv     * 5
+sys_svc_net_drv     * 6
+sys_svc_user        * 7
+sys_svc_cdr_drv     * 8
+sys_svcs            * 16
+
+        ; PC card HPC IDs
+sys_hpc_sys_info    * &0000
+sys_hpc_hard_disk   * &0001
+sys_hpc_floppy_disk * &0002
+sys_hpc_cdrom       * &0003
+sys_hpc_windows     * &0004
+sys_hpc_development * &000f
+sys_hpc_armedit     * &0105
+sys_hpc_winrisc     * &0106
+sys_hpc_reserved    * &ffff
+
+        ; PC card SWIs
+XPC_KeyInstall      * &64680
+PC_KeyInstall       * &44680
+XPC_KeyRelease      * &64681
+PC_KeyRelease       * &44681
+XPC_KeyCount        * &64682
+PC_KeyCount         * &44682
+XPC_KeyGet          * &64683
+PC_KeyGet           * &44683
+XPC_KeyFlush        * &64684
+PC_KeyFlush         * &44684
+XPC_KeySetLEDs      * &64685
+PC_KeySetLEDs       * &44685
+XPC_MouInstall      * &64686
+PC_MouInstall       * &44686
+XPC_MouRemove       * &64687
+PC_MouRemove        * &44687
+XPC_MouGetState     * &64688
+PC_MouGetState      * &44688
+XPC_ModeSetup       * &64689
+PC_ModeSetup        * &44689
+XPC_LockCard        * &6468a
+PC_LockCard         * &4468a
+XPC_CallbackSetup   * &6468b
+PC_CallbackSetup    * &4468b
+XPC_SetCallback     * &6468c
+PC_SetCallback      * &4468c
+XPC_GetCallback     * &6468d
+PC_GetCallback      * &4468d
+XPC_IrqRequest      * &6468e
+PC_IrqRequest       * &4468e
+XPC_DmaRequest      * &6468f
+PC_DmaRequest       * &4468f
+XPC_ModuleInfo      * &64690
+PC_ModuleInfo       * &44690
+
+XPCHelp_Init        * &6CD00
+PCHelp_Init         * &4CD00
+XPCHelp_RegisterIO  * &6CD01
+PCHelp_RegisterIO   * &4CD01
+XPCHelp_RegisterMem * &6CD02
+PCHelp_RegisterMem  * &4CD02
+XPCHelp_RegisterDMA * &6CD03
+PCHelp_RegisterDMA  * &4CD03
+XPCHelp_RegisterEvent * &6CD04
+PCHelp_RegisterEvent * &4CD04
+XPCHelp_RegisterConfig * &6CD05
+PCHelp_RegisterConfig * &4CD05
+XPCHelp_RegisterHPC * &6CD06
+PCHelp_RegisterHPC  * &4CD06
+XPCHelp_GetStructAddr * &6CD07
+PCHelp_GetStructAddr * &4CD07
+
+        ; PC card service calls
+Service_PCDevice    * &77
+
+        ; Selected x86 flag bits
+i86_flag_carry      * &1
+i86_flag_int_enable * &200
+
+        ; DMA modes
+dmamode_none        * &00
+dmamode_wr          * &01
+dmamode_rd          * &02
+dmamode_rev         * &08
+dmamode_demand      * &00
+dmamode_single      * &10
+dmamode_block       * &20
+xfer_tc_bit         * &80000000
+xfer_len_mask       * &7FFFFFFF
+
+        ; The version of the structures known about
+hdr1state_version   * 175               ; Hardware state structure version
+hdr2state_version   * 200               ; New hardware state structure version
+fe1state_version    * 176               ; Front-end state structure version
+fe2state_version    * 200               ; New front-end state structure version
+fe3state_version    * 202               ; New front-end state structure version
+
+        ; The versions returned by the module
+pcmodule_version    * 199               ; Minimum version for installing late
+
+        ; Details relating to memory handlers
+hdrstate_mem_slots  * 24                ; Number of memory handlers
+hdrstate_mem_spacing * &4000            ; Address space allocations
+hdrstate_mem_base   * &A0000            ; Start address for memory handlers
+
+        ; Details relating to I/O handlers
+hdrstate_io_slots   * 256               ; Number of emulated I/O ports
+hdrstate_io_spacing * 4                 ; Address space of an I/O port
+
+        ; Details relating to DMA handlers
+hdrstate_dma_slots  * 8                 ; Number of DMA channels
+
+        ; Details relating to HPC handlers
+hdrstate_hpc_slots  * 16                ; Number of HPC handler lists
+
+        ; Possible screen mode flags for fe_pc_mode_flags
+festate_modeflags_text * &01            ; A text mode
+festate_modeflags_b000 * &02            ; A B000 text mode instead of B800
+festate_modeflags_50line * &04          ; A 50 line mode
+festate_modeflags_40col * &08           ; A 40 column mode
+
+        ; Is a sprite identifier a name or a pointer
+sprite_id_tag_name  * 0                 ; A simple sprite name
+sprite_id_tag_addr  * &74527053         ; Magic number to test against
+
+; Define structures and types
+
+        ; x86 register structure
+                    ^ 0
+i86regs_svc_code    # Short             ; The SVC code
+i86regs_sp          # Short             ; Word-wide SP register
+i86regs_ss          # Short             ; Word-wide SS register
+i86regs_es          # Short             ; Word-wide ES register
+i86regs_ds          # Short             ; Word-wide DS register
+i86regs_di          # Short             ; Word-wide DI register
+i86regs_si          # Short             ; Word-wide SI register
+i86regs_bp          # Short             ; Word-wide BP register
+i86regs_dummy_sp    # Short             ; Dummy word-wide SP register
+i86regs_bx          # Short             ; Word-wide BX register
+i86regs_dx          # Short             ; Word-wide DX register
+i86regs_cx          # Short             ; Word-wide CX register
+i86regs_ax          # Short             ; Word-wide AX register
+i86regs_ip          # Short             ; Word-wide IP register
+i86regs_cs          # Short             ; Word-wide CS register
+i86regs_fl          # Short             ; Word-wide FL register
+i86regs             * @                 ; End of the structure
+
+        ; A screen mode
+                    ^ 0
+mode_spec_number    # Int               ; An old style mode number
+                    ^ 0
+mode_spec_selector  # Ptr               ; Pointer to a mode selector
+mode_spec           * @                 ; End of the structure
+
+        ; A sprite identifier can be either a name or an address
+                    ^ 0
+sprite_id_name      # Ptr               ; Pointer to a sprite name
+                    ^ 0
+sprite_id_ptr       # Ptr               ; Pointer to a sprite
+sprite_id_tag       # Int               ; Type of identifier
+sprite_id           * @                 ; End of the structure
+
+        ; Callback descriptor
+                    ^ 0
+callback_tag        # Int               ; Magic value set to zero initially
+callback_fn         # Ptr               ; Pointer to the callback handler
+callback_r0         # Int               ; Value of r12 when the function called
+callback_r12        # Int               ; Value of r12 when the function called
+callback_next       # Ptr               ; Pointer to the next entry in the list
+callback            * @                 ; End of the structure
+
+        ; Definition of routines associated with a slot in memory or I/O space
+                    ^ 0
+handler_read8       # Ptr               ; Pointer to handler for 8 bit reads
+handler_read16      # Ptr               ; Pointer to handler for 16 bit reads
+handler_write8      # Ptr               ; Pointer to handler for 8 bit writes
+handler_write16     # Ptr               ; Pointer to handler for 16 bit writes
+handler_r12         # Int               ; Value of r12 when the function called
+handler             * @                 ; End of the structure
+
+        ; A DMA handler structure
+                    ^ 0
+dma_handler_notify  # Ptr               ; Pointer to notify function
+dma_handler_transfer # Ptr              ; Pointer to transfer function
+dma_handler_r12     # Int               ; Value of r12 when the function called
+dma_handler         * @                 ; End of the structure
+
+        ; A HPC handler structure
+                    ^ 0
+hpc_handler_next    # Ptr               ; Pointer to the next handler
+hpc_handler_id      # Int               ; Service ID
+hpc_handler_flags   # Int               ; Flags (all reserved)
+hpc_handler_request # Int               ; Is a request to the PC being made
+hpc_handler_fn      # Ptr               ; Pointer to the HPC dispatch function
+hpc_handler_r12     # Int               ; Value of r12 when the function called
+hpc_handler         * @                 ; End of the structure
+
+        ; A list of SVC handler functions
+                    ^ 0
+call_svc_list_fn    # Ptr               ; Pointer to SVC handler function
+call_svc_list_next  # Ptr               ; Pointer to the next entry in the list
+call_svc_list_r12   # Int               ; Value of r12 when function called
+call_svc_list       * @                 ; End of the structure
+
+        ; A list of event handler functions
+                    ^ 0
+call_evt_list_fn    # Ptr               ; Pointer to event handler function
+call_evt_list_next  # Ptr               ; Pointer to the next entry in the list
+call_evt_list_r12   # Int               ; Value of r12 when function called
+call_evt_list       * @                 ; End of the structure
+
+        ; A list of unknown configuration item handler functions
+                    ^ 0
+call_cfg_list_fn    # Ptr               ; Pointer to configure handler function
+call_cfg_list_next  # Ptr               ; Pointer to the next entry in the list
+call_cfg_list_r12   # Int               ; Value of r12 when function called
+call_cfg_list       * @                 ; End of the structure
+
+        ; A HPC packet
+                    ^ 0
+hpc_packet_id       # Short             ; HPC service ID
+hpc_packet_data     # 16384 - @         ; Total length of message is 16kB
+hpc_packet          * @                 ; End of the structure
+
+        ; Version number counter
+        GBLA    vn
+        GBLS    v
+
+        ; The front-end state structure
+vn      SETA    3                       ; There are 3 versions of front-end
+        WHILE   0 < vn                  ; Loop through version numbers
+v       SETS    :STR: vn :RIGHT: 1      ; Convert number to simple string
+                    ^ 0
+fe$v._current_ver   # Int               ; Current version of the structure
+fe$v._min_compat_ver # Int              ; Minimum version compatible with
+fe$v._suspend_request # Int             ; Set to suspend full-screen mode
+fe$v._quit_request  # Int               ; Set to suspend whole application
+fe$v._reset_request # Int               ; Set to reset CPU at next opportunity
+        [       2 <= vn
+fe$v._freeze_request # Int              ; Set to freeze multitasking mode
+        ]
+fe$v._full_running  # Int               ; Is program running full-screen
+fe$v._win_running   # Int               ; Is program running in a window
+fe$v._has_input_focus # Int             ; Has front-end got the input focus
+fe$v._wimp_mode     # mode_spec         ; Mode in which the WIMP is running
+fe$v._arm_bottom_y  # Int               ; RISC OS vertical origin of image
+fe$v._arm_left_x    # Int               ; RISC OS horizontal origin of image
+fe$v._win_x_min     # Int               ; Left hand edge of visible area
+fe$v._win_x_max     # Int               ; Right hand edge of visible area
+fe$v._win_y_min     # Int               ; Bottom edge of visible area
+fe$v._win_y_max     # Int               ; Top edge of visisble area
+fe$v._x_ratio       # Int               ; RISC OS units per horizontal pixel
+fe$v._y_ratio       # Int               ; RISC OS units per vertical pixel
+        [       vn = 1
+fe$v._pc_mode_flags # Int               ; PC screen mode flags
+        |
+fe$v._get_text      # Ptr               ; Function to read screen text
+        ]
+fe$v._x_pixels      # Int               ; Width of PC screen image
+fe$v._y_pixels      # Int               ; Height of PC screen image
+fe$v._pc_bpp        # Int               ; Bits per pixel in PC screen image
+fe$v._mode_changed  # Int               ; Has the PC screen mode been changed
+fe$v._sprite_area   # Ptr               ; Pointer to PC screen data sprite
+fe$v._sprite        # sprite_id         ; The PC screen sprite identifier
+fe$v._palette_changed # Int             ; Has fe_colour_table been modified
+fe$v._colour_table  # Int * 256         ; Palette for the PC sprite
+fe$v._chgd_x_min    # Int               ; Left hand edge of changed area
+fe$v._chgd_x_max    # Int               ; Right hand edge of changed area
+fe$v._chgd_y_min    # Int               ; Bottom edge of changed area
+fe$v._chgd_y_max    # Int               ; Top edge of changed area
+        [       vn < 3
+fe$v._vert_scroll   # Int               ; Number of pixels scrolled by
+fe$v._activity      # Int               ; Used to measure PC activity in WIMP
+        |
+fe$v._activity      # Int               ; Used to measure PC activity in WIMP
+fe$v._vert_scroll   # Int               ; Number of pixels scrolled by
+        ]
+fe$v._redraw_delay  # Int               ; Delay redraw to improve performance
+fe$v                * @                 ; End of the structure
+vn      SETA    vn - 1                  ; Decrement counter
+        WEND
+
+        ; The hardware state structure
+vn      SETA    2                       ; There are 2 versions of hardware
+        WHILE   0 < vn                  ; Loop through version numbers
+v       SETS    :STR: vn :RIGHT: 1      ; Convert number to simple string
+                    ^ 0
+hdr$v._current_ver  # Int               ; Current version of the structure
+hdr$v._min_compat_ver # Int             ; Minimum version compatible with
+hdr$v._mem_handlers # handler * hdrstate_mem_slots; Memory handlers
+hdr$v._io_handlers  # handler * hdrstate_io_slots; I/O handlers
+hdr$v._dma_handlers # dma_handler * hdrstate_dma_slots; DMA handlers
+hdr$v._null_handlers # handler          ; Null handler if intercept not used
+hdr$v._null_dma_handlers # dma_handler  ; Null handler if intercept not used
+hdr$v._cpu_interrupt # Ptr              ; Function to generate interrupts
+hdr$v._ints_available # Bits            ; Bit mask of available interrupts
+hdr$v._dma_request  # Ptr               ; Function to request DMA transfer
+hdr$v._dmas_available # Bits            ; Bits mask of available channels
+hdr$v._set_a20_gate # Ptr               ; Function to set state of A20gate line
+hdr$v._event_list   # Ptr * sys_events  ; Lists of event handler functions
+hdr$v._configure_list # Ptr             ; List of configuration handlers
+        [       vn = 1
+hdr$v._svc_list     # Ptr * sys_svcs
+hdr$v._cpu_handlers # handler
+hdr$v._cpu_read_many # Ptr
+hdr$v._cpu_write_many # Ptr
+        |
+hdr$v._hpc_handlers # Ptr * hdrstate_hpc_slots; HPC handler lists
+hdr$v._hpc_request  # Ptr               ; Function to cause HPC request
+        ]
+hdr$v               * @                 ; End of the structure
+vn      SETA    vn - 1                  ; Decrement counter
+        WEND
+
+; Define macros
+
+        ;   Syntax      : [<label>] HPC_Hash <rd>
+        ;   Parameters  : label - An optional program label.
+        ;                 rd    - The register containing the HPC service ID
+        ;                         to convert to an array index.
+        ;   Description : Hash function to choose list for a particular HPC
+        ;                 service ID.
+        MACRO
+$label  HPC_Hash $rd
+$label  MacroLabels
+        AND     $rd, $rd, #15           ; The very simple hash function
+        MacroLabelsEnd
+        MEND
+
+        ]
+        END

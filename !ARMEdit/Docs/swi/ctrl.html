@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!-- File        : swi/ctrl.html -->
+<!-- Date        : 28-May-01 -->
+<!-- Author      : © Alexander Thoukydides, 2001 -->
+<!-- Description : Part of the ARMEdit documentation. -->
+<HTML>
+<HEAD>
+<TITLE>ARMEdit Documentation - SWI Calls [ARMEdit_ControlPC]</TITLE>
+<LINK REV=MADE HREF="mailto:armedit@thouky.co.uk">
+<LINK REL=PARENT HREF="index.html">
+<META NAME=DESCRIPTION CONTENT="ARMEdit Documentation - SWI Calls [ARMEdit_ControlPC]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#004499" ALINK="#FF0000">
+<CENTER>
+<H1><FONT COLOR="#004499"><B><I>ARMEdit</I></B></FONT>: SWI Calls</H1>
+<B>ARMEdit_ControlPC</B> </CENTER>
+<HR>
+<TABLE WIDTH="100%"><TR><TD COLSPAN=4 ALIGN=RIGHT><FONT COLOR="#DD0000"><TT><B>ARMEdit_ControlPC</B></TT><BR><TT>(SWI&nbsp;&amp;4BC40)</TT></FONT></TD></TR><TR VALIGN=TOP><TD></TD><TD COLSPAN=3>Control the PC front-end</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>On&nbsp;entry:</B></FONT></TD><TD>R0&nbsp;=</TD><TD COLSPAN=2>operation to perform:
+<TABLE ALIGN=LEFT>
+<TR ALIGN=TOP VALIGN=TOP><TD NOWRAP>0</TD><TD>Suspend full screen mode</TD></TR>
+<TR ALIGN=TOP VALIGN=TOP><TD NOWRAP>1</TD><TD>Freeze running in a window</TD></TR>
+<TR ALIGN=TOP VALIGN=TOP><TD NOWRAP>2</TD><TD>Reset the PC</TD></TR>
+<TR ALIGN=TOP VALIGN=TOP><TD NOWRAP>3</TD><TD>Quit the front-end</TD></TR>
+</TABLE>
+</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>On&nbsp;exit:</B></FONT></TD><TD COLSPAN=3>Registers preserved</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Interrupts:</B></FONT></TD><TD COLSPAN=3>Interrupt status is undefined<BR>Fast interrupts are enabled</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Processor&nbsp;mode:</B></FONT></TD><TD COLSPAN=3>Processor is in SVC mode</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Re-entrancy:</B></FONT></TD><TD COLSPAN=3>SWI is not re-entrant</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Use:</B></FONT></TD><TD COLSPAN=3>
+This call allows the PC front-end to be controlled. If the PC front-end is not the current application then this will only take effect the next time the front-end is paged in.
+<P>
+Note that suspending full screen mode only starts execution in a window if enabled by the current configuration.
+</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Related&nbsp;SWIs:</B></FONT></TD><TD COLSPAN=3><TT><A HREF="poll.html" TITLE="ARMEdit_Polling">ARMEdit_Polling</A></TT></TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Related&nbsp;vectors:</B></FONT></TD><TD COLSPAN=3>None</TD></TR>
+</TABLE>
+<HR> <TABLE WIDTH="100%">
+<TR VALIGN=TOP>
+<TD>
+[<A HREF="../index.html" TITLE="Contents">Contents</A>]
+[<A HREF="index.html" TITLE="Up">Up</A>]
+</TD>
+<TD ALIGN=RIGHT>
+<FONT SIZE=-1><I> <A HREF="../legal/copy.html" TITLE="Copyright">Copyright</A> &copy; <A HREF="mailto:armedit@thouky.co.uk" TITLE="Send Email to Alexander Thoukydides">Alexander Thoukydides</A>, 2001</I></FONT>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

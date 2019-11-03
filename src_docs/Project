@@ -1,0 +1,303 @@
+HSC_PROJECT
+VERSION 2 
+# Contains all data relevant for project.
+# Maintained by hsc, DO NOT MODIFY!
+# updated: 15-Jul-2001 19:24:25
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/fread.html
+SOURCE d hpc/fread.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/fwrit.html
+SOURCE d hpc/fwrit.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/tstrt.html
+SOURCE d hpc/tstrt.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1e ../!ARMEdit/Docs/hpc/tend.html
+SOURCE c hpc/tend.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1d ../!ARMEdit/Docs/hpc/ttx.html
+SOURCE b hpc/ttx.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1d ../!ARMEdit/Docs/hpc/trx.html
+SOURCE b hpc/trx.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/dinit.html
+SOURCE d hpc/dinit.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1e ../!ARMEdit/Docs/hpc/dbpb.html
+SOURCE c hpc/dbpb.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/dchgd.html
+SOURCE d hpc/dchgd.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/dread.html
+SOURCE d hpc/dread.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/dwrit.html
+SOURCE d hpc/dwrit.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/dttdo.html
+SOURCE d hpc/dttdo.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/dttro.html
+SOURCE d hpc/dttro.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/ostrt.html
+SOURCE d hpc/ostrt.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/opoll.html
+SOURCE d hpc/opoll.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1e ../!ARMEdit/Docs/hpc/oend.html
+SOURCE c hpc/oend.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/trply.html
+SOURCE d hpc/trply.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/fastr.html
+SOURCE d hpc/fastr.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1e ../!ARMEdit/Docs/hpc/temp.html
+SOURCE c hpc/temp.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1e ../!ARMEdit/Docs/hpc/dlrd.html
+SOURCE c hpc/dlrd.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/dlwrt.html
+SOURCE d hpc/dlwrt.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/dopen.html
+SOURCE d hpc/dopen.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/dclse.html
+SOURCE d hpc/dclse.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/drmvb.html
+SOURCE d hpc/drmvb.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/index.html
+SOURCE d hpc/index.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/swi/index.html
+SOURCE d swi/index.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1a ../!ARMEdit/Docs/vers.html
+SOURCE 8 vers.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1b ../!ARMEdit/Docs/index.html
+SOURCE 9 index.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+INCLUDE 7 Release
+DOCUMENT 1e ../!ARMEdit/Docs/swi/ctrl.html
+SOURCE c swi/ctrl.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1d ../!ARMEdit/Docs/swi/hpc.html
+SOURCE b swi/hpc.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1e ../!ARMEdit/Docs/swi/poll.html
+SOURCE c swi/poll.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1e ../!ARMEdit/Docs/swi/tack.html
+SOURCE c swi/tack.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1e ../!ARMEdit/Docs/swi/tend.html
+SOURCE c swi/tend.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/swi/trply.html
+SOURCE d swi/trply.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1d ../!ARMEdit/Docs/swi/ttx.html
+SOURCE b swi/ttx.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/swi/tstrt.html
+SOURCE d swi/tstrt.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 23 ../!ARMEdit/Docs/command/index.html
+SOURCE 11 command/index.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 21 ../!ARMEdit/Docs/command/dev.html
+SOURCE f command/dev.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 21 ../!ARMEdit/Docs/command/map.html
+SOURCE f command/map.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 21 ../!ARMEdit/Docs/command/ver.html
+SOURCE f command/ver.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1d ../!ARMEdit/Docs/swi/trx.html
+SOURCE b swi/trx.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 23 ../!ARMEdit/Docs/command/clnts.html
+SOURCE 11 command/clnts.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 23 ../!ARMEdit/Docs/command/devre.html
+SOURCE 11 command/devre.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 22 ../!ARMEdit/Docs/command/poll.html
+SOURCE 10 command/poll.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 21 ../!ARMEdit/Docs/command/mem.html
+SOURCE f command/mem.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 23 ../!ARMEdit/Docs/command/files.html
+SOURCE 11 command/files.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1c ../!ARMEdit/Docs/hpc/rc.html
+SOURCE a hpc/rc.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1c ../!ARMEdit/Docs/hpc/io.html
+SOURCE a hpc/io.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1a ../!ARMEdit/Docs/xref.html
+SOURCE 8 xref.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+INCLUDE 8 database
+DOCUMENT 1b ../!ARMEdit/Docs/cntnt.html
+SOURCE 9 cntnt.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+INCLUDE 8 database
+DOCUMENT 1d ../!ARMEdit/Docs/hpc/swi.html
+SOURCE b hpc/swi.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1e ../!ARMEdit/Docs/hpc/read.html
+SOURCE c hpc/read.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/write.html
+SOURCE d hpc/write.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/alloc.html
+SOURCE d hpc/alloc.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1e ../!ARMEdit/Docs/hpc/free.html
+SOURCE c hpc/free.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/extyp.html
+SOURCE d hpc/extyp.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/typex.html
+SOURCE d hpc/typex.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/fopen.html
+SOURCE d hpc/fopen.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc
+DOCUMENT 1f ../!ARMEdit/Docs/hpc/fclse.html
+SOURCE d hpc/fclse.hsc
+TITLE 0 
+INCLUDE 9 brand.hsc
+INCLUDE a macros.hsc

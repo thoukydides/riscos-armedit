@@ -1,0 +1,44 @@
+#   File        : Messages
+#   Date        : 15-May-01
+#   Author      : © A.Thoukydides, 1996-2001, 2019
+#   Description : Text messages for the ARMEdit application. This is a common
+#                 resource for both the Banner application and the main task.
+#
+#   License     : ARMEdit is free software: you can redistribute it and/or
+#                 modify it under the terms of the GNU General Public License
+#                 as published by the Free Software Foundation, either
+#                 version 3 of the License, or (at your option) any later
+#                 version.
+#
+#                 ARMEdit is distributed in the hope that it will be useful,
+#                 but WITHOUT ANY WARRANTY; without even the implied warranty
+#                 of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+#                 the GNU General Public License for more details.
+#
+#                 You should have received a copy of the GNU General Public
+#                 License along with ARMEdit. If not, see
+#                 <http://www.gnu.org/licenses/>.
+
+# General messages
+_TaskName:ARMEdit
+Version:1.05 (15-May-01)
+
+# Banner specific messages
+VerLabel:Test version
+#VerLabel:Version
+
+# Serious error handling
+SigBut:Continue,Quit
+SigTpl:%0 Click Continue to attempt to carry on, or Quit to exit immediately.
+SigTplO:%0 Click OK to attempt to carry on, or Cancel to exit immediately.
+SigFPE:An arithmetic exception has occurred.
+SigIll:An illegal instruction has been executed.
+SigSegV:A bad memory access has occurred.
+SigStak:A stack overflow has occurred.
+SigErr:An unexpected error has occurred: '%0'
+SigUnk:An unexpected error has occurred.
+
+# Application specific messages
+Running:A copy of ARMEdit is already running. Please quit the first copy before attempting to run another one.
+Quit1:There is 1 external edit active. Do you wish to abandon the file and quit?
+Quit2:There are %d external edits active. Do you wish to abandon the files and quit?

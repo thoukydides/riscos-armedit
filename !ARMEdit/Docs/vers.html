@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!-- File        : vers.html -->
+<!-- Date        : 28-May-01 -->
+<!-- Author      : © Alexander Thoukydides, 2001 -->
+<!-- Description : Part of the ARMEdit documentation. -->
+<HTML>
+<HEAD>
+<TITLE>ARMEdit Documentation - Version History</TITLE>
+<LINK REV=MADE HREF="mailto:armedit@thouky.co.uk">
+<LINK REL=PARENT HREF="index.html">
+<META NAME=DESCRIPTION CONTENT="ARMEdit Documentation - Version History">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#004499" ALINK="#FF0000">
+<CENTER>
+<H1><FONT COLOR="#004499"><B><I>ARMEdit</I></B></FONT>: Version History</H1>
+</CENTER>
+<TABLE BORDER=1 WIDTH="100%">
+<TR><TH NOWRAP>Version</TH><TH NOWRAP>Date</TH><TH>Description</TH></TR>
+<TR VALIGN=TOP>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER BGCOLOR="#EEEEBB">1.05</TD>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER BGCOLOR="#EEEEBB">17-May-01</TD>
+<TD BGCOLOR="#EEEEBB">
+New version under development...<BR>
+More efficient service call handling under RISC OS 4.<BR>
+Smaller message size used to prevent data corruption.
+</TD>
+<TR>
+<TR VALIGN=TOP>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER>1.04</TD>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER>07-Dec-97</TD>
+<TD>
+Corrected device driver operation for large logical media.<BR>
+Added device driver support for removable media.<BR>
+Extra information is displayed for *ARMEdit_Devices.<BR>
+*ARMEdit_Files also lists files used by the device driver.<BR>
+Spaces no longer added to end of OSCLI commands.<BR>
+Shell mode added to OSCLI tool with command line editing and history.<BR>
+VDU codes in OSCLI output processed before being displayed.<BR>
+OSCLI commands may be executed in a RISC OS TaskWindow.
+</TD>
+<TR>
+<TR VALIGN=TOP>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER>1.03</TD>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER>21-Feb-95</TD>
+<TD>
+Added SWI to set multitasking speed of PC front-end.<BR>
+Added SWI to reply to a message.<BR>
+Broadcast messages from the ARMEdit module are now sent.<BR>
+Speed control now works correctly with PC front-end 2v02.<BR>
+Extended *ARMEdit_DevicesRelog to force immediate relog.<BR>
+Added ARMEDIT command line tools.<BR>
+Speeded up file transfer when multitasking.<BR>
+Included support for wildcards and recursion.<BR>
+Unique temporary filenames used.<BR>
+Operation of command line tools under Windows now more reliable.<BR>
+Added option to use a RISC OS &quot;Save as&quot; window for PUTFILE.
+</TD>
+<TR>
+<TR VALIGN=TOP>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER>1.02</TD>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER>06-Aug-96</TD>
+<TD>
+Some memory management moved to a dynamic area if available.<BR>
+Full device driver support added.<BR>
+Routines to convert date and time stamps included.<BR>
+Added SWI to call internal HPC services.<BR>
+Corrected command help texts.<BR>
+Added command to set multitasking speed of PC front-end.<BR>
+Provided mechanism for checking delivery of messages.<BR>
+Date and time stamps are preserved on copied files.<BR>
+Support for Acorn's software PC emulator included.<BR>
+Included redirection of OSCLI input stream through DOS.
+</TD>
+<TR>
+<TR VALIGN=TOP>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER>1.01</TD>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER>11-Feb-96</TD>
+<TD>
+Does not crash when no DOSMap mappings defined.<BR>
+Module can be loaded after new versions of the PC front-end.
+</TD>
+<TR>
+<TR VALIGN=TOP>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER>1.00</TD>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER>12-Jan-96</TD>
+<TD>
+First official release version.
+</TD>
+<TR>
+<TR VALIGN=TOP>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER><FONT COLOR="#666666">0.07</FONT></TD>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER><FONT COLOR="#666666">28-Dec-95</FONT></TD>
+<TD><FONT COLOR="#666666">
+Added message passing protocol.
+</FONT></TD>
+<TR>
+<TR VALIGN=TOP>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER><FONT COLOR="#666666">0.06</FONT></TD>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER><FONT COLOR="#666666">22-Dec-95</FONT></TD>
+<TD><FONT COLOR="#666666">
+Added SWI to control the PC front-end.
+</FONT></TD>
+<TR>
+<TR VALIGN=TOP>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER><FONT COLOR="#666666">0.05</FONT></TD>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER><FONT COLOR="#666666">17-Dec-95</FONT></TD>
+<TD><FONT COLOR="#666666">
+Improved filename translation.
+</FONT></TD>
+<TR>
+<TR VALIGN=TOP>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER><FONT COLOR="#666666">0.04</FONT></TD>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER><FONT COLOR="#666666">21-Nov-95</FONT></TD>
+<TD><FONT COLOR="#666666">
+Implemented the *commands and real HPC support.<BR>
+Experimental device driver support added.
+</FONT></TD>
+<TR>
+<TR VALIGN=TOP>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER><FONT COLOR="#666666">0.03</FONT></TD>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER><FONT COLOR="#666666">17-Nov-95</FONT></TD>
+<TD><FONT COLOR="#666666">
+Uses correct HPC service identifier.<BR>
+Includes development versions of device driver support.
+Changed command line tools to .COM files to make them smaller.<BR>
+Made error checking more comprehensive and added help text to command line tools.<BR>
+Output redirection of OSCLI command made optional.<BR>
+Filetype of destination files for PUTFILE based on file extension.
+</FONT></TD>
+<TR>
+<TR VALIGN=TOP>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER><FONT COLOR="#666666">0.02</FONT></TD>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER><FONT COLOR="#666666">15-Nov-95</FONT></TD>
+<TD><FONT COLOR="#666666">
+Included extra command to display PC front-end version.<BR>
+Fixed workspace handling for *commands.<BR>
+</FONT></TD>
+<TR>
+<TR VALIGN=TOP>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER><FONT COLOR="#666666">0.01</FONT></TD>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER><FONT COLOR="#666666">14-Nov-95</FONT></TD>
+<TD><FONT COLOR="#666666">
+Fixed bugs in file handling.<BR>
+Removed stray debugging code.<BR>
+Sets variable for scrap directory and ensure it exists.<BR>
+Added version number and copyright message to command line tools.<BR>
+Output of commands executed by the OSCLI utility passed through standard output.
+</FONT></TD>
+<TR>
+<TR VALIGN=TOP>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER><FONT COLOR="#666666">0.00</FONT></TD>
+<TD NOWRAP WIDTH=70 ALIGN=CENTER><FONT COLOR="#666666">12-Nov-95</FONT></TD>
+<TD><FONT COLOR="#666666">
+Original development version.
+</FONT></TD>
+<TR>
+</TABLE>
+<TABLE WIDTH="100%">
+<TR VALIGN=TOP>
+<TD>
+[<A HREF="index.html" TITLE="Contents">Contents</A>]
+</TD>
+<TD ALIGN=RIGHT>
+<FONT SIZE=-1><I> <A HREF="legal/copy.html" TITLE="Copyright">Copyright</A> &copy; <A HREF="mailto:armedit@thouky.co.uk" TITLE="Send Email to Alexander Thoukydides">Alexander Thoukydides</A>, 2001</I></FONT>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

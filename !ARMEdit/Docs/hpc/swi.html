@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!-- File        : hpc/swi.html -->
+<!-- Date        : 07-Jun-01 -->
+<!-- Author      : © Alexander Thoukydides, 2001 -->
+<!-- Description : Part of the ARMEdit documentation. -->
+<HTML>
+<HEAD>
+<TITLE>ARMEdit Documentation - HPC Services [HPC_ARMEDIT_SWI]</TITLE>
+<LINK REV=MADE HREF="mailto:armedit@thouky.co.uk">
+<LINK REL=PARENT HREF="index.html">
+<META NAME=DESCRIPTION CONTENT="ARMEdit Documentation - HPC Services [HPC_ARMEDIT_SWI]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#004499" ALINK="#FF0000">
+<CENTER>
+<H1><FONT COLOR="#004499"><B><I>ARMEdit</I></B></FONT>: HPC Services</H1>
+<B>HPC_ARMEDIT_SWI</B> </CENTER>
+<HR>
+<TABLE WIDTH="100%"><TR><TD COLSPAN=4 ALIGN=RIGHT><FONT COLOR="#DD0000"><TT><B>HPC_ARMEDIT_SWI</B></TT><BR><TT>(HPC&nbsp;&amp;0105:&amp;0000)</TT></FONT></TD></TR><TR VALIGN=TOP><TD></TD><TD COLSPAN=3>Call a RISC OS SWI by number</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Data&nbsp;sent:</B></FONT></TD><TD>0</TD><TD COLSPAN=2>HPC service ID = &amp;0105</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+2</TD><TD COLSPAN=2>reason code = &amp;0000</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+4</TD><TD COLSPAN=2>SWI number to call</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+8</TD><TD COLSPAN=2>value for R0 register on entry to the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+12</TD><TD COLSPAN=2>value for R1 register on entry to the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+16</TD><TD COLSPAN=2>value for R2 register on entry to the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+20</TD><TD COLSPAN=2>value for R3 register on entry to the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+24</TD><TD COLSPAN=2>value for R4 register on entry to the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+28</TD><TD COLSPAN=2>value for R5 register on entry to the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+32</TD><TD COLSPAN=2>value for R6 register on entry to the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+36</TD><TD COLSPAN=2>value for R7 register on entry to the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+40</TD><TD COLSPAN=2>value for R8 register on entry to the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+44</TD><TD COLSPAN=2>value for R9 register on entry to the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+48</TD><TD COLSPAN=2></TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Data&nbsp;returned:</B></FONT></TD><TD>0</TD><TD COLSPAN=2><A HREF="rc.html" TITLE="Return Code">return code</A></TD></TR>
+<TR VALIGN=TOP><TD></TD><TD COLSPAN=3>If the return code is &amp;0001</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD></TD><TD>+4</TD><TD>RISC OS style error block returned by SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD COLSPAN=3>If the return code is &amp;0000</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD></TD><TD>+260</TD><TD>value of R0 register on exit from the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD></TD><TD>+264</TD><TD>value of R1 register on exit from the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD></TD><TD>+268</TD><TD>value of R2 register on exit from the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD></TD><TD>+272</TD><TD>value of R3 register on exit from the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD></TD><TD>+276</TD><TD>value of R4 register on exit from the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD></TD><TD>+280</TD><TD>value of R5 register on exit from the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD></TD><TD>+284</TD><TD>value of R6 register on exit from the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD></TD><TD>+288</TD><TD>value of R7 register on exit from the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD></TD><TD>+292</TD><TD>value of R8 register on exit from the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD></TD><TD>+296</TD><TD>value of R9 register on exit from the SWI</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+300</TD><TD COLSPAN=2></TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Use:</B></FONT></TD><TD COLSPAN=3>
+Calls a specified RISC OS SWI by number. The SWI is always called with the X (error returning) bit set.
+<P>
+Note that the reply packet is always the same length, regardless of whether the SWI returned an error.
+</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Related&nbsp;services:</B></FONT></TD><TD COLSPAN=3><TT><A HREF="read.html" TITLE="HPC_ARMEDIT_READ">HPC_ARMEDIT_READ</A></TT>, <TT><A HREF="write.html" TITLE="HPC_ARMEDIT_WRITE">HPC_ARMEDIT_WRITE</A></TT>, <TT><A HREF="alloc.html" TITLE="HPC_ARMEDIT_ALLOC">HPC_ARMEDIT_ALLOC</A></TT>, <TT><A HREF="free.html" TITLE="HPC_ARMEDIT_FREE">HPC_ARMEDIT_FREE</A></TT></TD></TR>
+</TABLE>
+<HR> <TABLE WIDTH="100%">
+<TR VALIGN=TOP>
+<TD>
+[<A HREF="../index.html" TITLE="Contents">Contents</A>]
+[<A HREF="index.html" TITLE="Up">Up</A>]
+</TD>
+<TD ALIGN=RIGHT>
+<FONT SIZE=-1><I> <A HREF="../legal/copy.html" TITLE="Copyright">Copyright</A> &copy; <A HREF="mailto:armedit@thouky.co.uk" TITLE="Send Email to Alexander Thoukydides">Alexander Thoukydides</A>, 2001</I></FONT>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

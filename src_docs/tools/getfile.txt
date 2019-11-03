@@ -1,0 +1,51 @@
+File        : getfile.txt
+Date        : 18-Apr-98
+Author      : © A.Thoukydides, 1995-1998, 2019
+Description : Description of the PC GETFILE command that is part of the
+              ARMEdit suite.
+    
+License     : ARMEdit is free software: you can redistribute it and/or
+              modify it under the terms of the GNU General Public License
+              as published by the Free Software Foundation, either
+              version 3 of the License, or (at your option) any later
+              version.
+
+              ARMEdit is distributed in the hope that it will be useful,
+              but WITHOUT ANY WARRANTY; without even the implied warranty
+              of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+              the GNU General Public License for more details.
+
+              You should have received a copy of the GNU General Public
+              License along with ARMEdit. If not, see
+              <http://www.gnu.org/licenses/>.
+
+
+INTRODUCTION
+
+The "GETFILE" command is a replacement for the command of the same name that
+was supplied with Acorn's software PC emulator. It allows RISC OS files to be
+transferred to DOS. To use this command it is necessary to load the ARMEdit
+module before starting the PC front-end.
+
+
+USAGE
+
+The syntax is:
+
+    GETFILE [/?] [/M] [/P] [/S] <RISC OS file> [<DOS file>]
+
+where
+
+    /?              - Displays some help text.
+    /M              - Enable multitasking during copying.
+    /P              - Prompts before copying each file.
+    /S              - Copy subdirectories.
+    <RISC OS file>  - Wildcarded source RISC OS file specification to copy.
+    <DOS file>      - The destination DOS path.
+
+The source path may include standard RISC OS wildcards, i.e. "#" to match a
+single character or "*" for multiple characters. Files are matched using the
+same rules as used by RISC OS commands.
+
+If no destination filename is specified then the source filename is used with
+various character transformations performed.

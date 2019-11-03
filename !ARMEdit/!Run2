@@ -1,0 +1,55 @@
+|   File        : !Run2
+|   Date        : 15-May-01
+|   Author      : © A.Thoukydides, 1996-2001, 2019
+|   Description : The second part of the script used to start the ARMEdit
+|                 application. This ensures that all required modules are
+|                 loaded, and then starts the actual application.
+|
+|   License     : ARMEdit is free software: you can redistribute it and/or
+|                 modify it under the terms of the GNU General Public License
+|                 as published by the Free Software Foundation, either
+|                 version 3 of the License, or (at your option) any later
+|                 version.
+|
+|                 ARMEdit is distributed in the hope that it will be useful,
+|                 but WITHOUT ANY WARRANTY; without even the implied warranty
+|                 of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+|                 the GNU General Public License for more details.
+|
+|                 You should have received a copy of the GNU General Public
+|                 License along with ARMEdit. If not, see
+|                 <http://www.gnu.org/licenses/>.
+
+| Check that there is sufficient memory to run
+WimpSlot -min 88K -max 88K
+
+| Check that a !Scrap folder exists
+If "<Wimp$Scrap>"="" Then Error 0 Scrap folder could not be found. Please double-click on a copy of !Scrap and try again.
+
+| Special care needs to be taken over the C library
+Set ARMEdit$CLibLoaded 1
+RMEnsure SharedCLibrary 0.00 Set ARMEdit$CLibLoaded 0
+If ARMEdit$CLibLoaded=1 Then RMEnsure SharedCLibrary 3.75 Error 0 You are already running a version of CLib which is too old. This application needs SharedCLibrary 3.75 or later.
+UnSet ARMEdit$CLibLoaded
+
+| Ensure that the correct versions of modules are loaded
+Run <ARMEdit$Dir>.Resources.Ensure SharedCLibrary 3.75 CLib
+Run <ARMEdit$Dir>.Resources.Ensure FPEmulator     4.00 FPEmulator
+Run <ARMEdit$Dir>.Resources.Ensure MessageTrans   0.28 MsgTrans
+Run <ARMEdit$Dir>.Resources.Ensure ColourTrans    0.52 Colours
+Run <ARMEdit$Dir>.Resources.Ensure Toolbox        1.43 Toolbox.Toolbox
+Run <ARMEdit$Dir>.Resources.Ensure DCS            1.08 Toolbox.DCS_Quit
+Run <ARMEdit$Dir>.Resources.Ensure Iconbar        1.18 Toolbox.IconBar
+Run <ARMEdit$Dir>.Resources.Ensure Menu           0.33 Toolbox.Menu
+Run <ARMEdit$Dir>.Resources.Ensure ProgInfo       0.15 Toolbox.ProgInfo
+Run <ARMEdit$Dir>.Resources.Ensure SaveAs         0.15 Toolbox.SaveAs
+Run <ARMEdit$Dir>.Resources.Ensure Window         1.54 Toolbox.Window
+
+| Load the latest version of the ARMEdit module
+RMEnsure ARMEdit 1.05 Run <ARMEdit$Dir>.Resources.ARMEdit
+
+| Check again that there is sufficient memory to run
+WimpSlot -min 88K -max 88K
+
+| Finally start the application
+Run <ARMEdit$Dir>.Resources.!RunImage

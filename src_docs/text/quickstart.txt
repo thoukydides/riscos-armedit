@@ -1,0 +1,197 @@
+File        : quickstart.txt
+Date        : 18-Apr-98
+Author      : © A.Thoukydides, 1997-1998, 2019
+Description : A quick introduction to installing and using the ARMEdit suite.
+    
+License     : ARMEdit is free software: you can redistribute it and/or
+              modify it under the terms of the GNU General Public License
+              as published by the Free Software Foundation, either
+              version 3 of the License, or (at your option) any later
+              version.
+
+              ARMEdit is distributed in the hope that it will be useful,
+              but WITHOUT ANY WARRANTY; without even the implied warranty
+              of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+              the GNU General Public License for more details.
+
+              You should have received a copy of the GNU General Public
+              License along with ARMEdit. If not, see
+              <http://www.gnu.org/licenses/>.
+
+
+INTRODUCTION
+
+This file explains how to get the ARMEdit suite up and running quickly. More
+experienced users may prefer to read the other documentation files for
+greater control over how the software is installed and configured.
+
+It is assumed that you know how to use the mouse and windows environment on
+your RISC OS computer. If this is not the case then please read the Welcome
+guide which came with your computer before continuing.
+
+
+PREPARATION
+
+The ARMEdit suite requires either a version of the PC front-end software 1.87
+or above, or any version of Acorn's software emulator. Better performance
+will be obtained if PCPro (!PC version 2.00 or higher) is used. The version
+number is displayed in the Info window from the icon-bar icon. See the
+Docs.Contacts file for details of obtaining upgrades.
+
+The rest of this file assumes that a PC card (Risc PC second processor or
+podule) is being used.
+
+The !ARMEdit front-end also requires copies of the Acorn Toolbox modules.
+These are already present in RISC OS 3.6 and above, but must be placed in the
+!System directory on older machines. See the Docs.Contacts file for details
+of where to obtain them.
+
+
+INSTALLING THE SOFTWARE
+
+The first step, unless it has already been performed, is to copy the
+"!ARMEdit" application to the computer's hard disc. A good choice of location
+is to use the same directory as used for the PC front-end software. If the
+software was distributed compressed then it must also be decompressed before
+use.
+
+Start the front-end by double-clicking SELECT on the "!ARMEdit" icon in a
+directory viewer. If the software has not previously been configured then the
+installer window will automatically open. Interactive help is fully
+supported; use Acorn's !Help application to obtain information about the item
+under the mouse pointer. This may be started by clicking on the HELP icon at
+the bottom of the installer window.
+
+Follow the prompts to configure the main options. Click CONTINUE to advance
+to the next stage after making any changes required. The following values
+will be requested:
+
+    Application paths   The path for the PC card front-end software and
+                        configuration tool are required. These are used when
+                        the multiple configurations option is used. If the
+                        PC front-end has been "seen" by the filer then these
+                        fields should already be correctly filled, otherwise
+                        simply drag their icons over the "drop icons" to set
+                        the correct paths.
+                        
+    DOS partition path  The path for the PC partition. This will normally be
+                        an image file called DriveC. If a direct SCSI device
+                        is being used then specify the RISC OS path of the
+                        root directory, e.g. "SCSI::4.$".
+
+At this stage the configuration will be stored for later use, and a prompt is
+displayed to allow either a standard or custom installation of files into the
+DOS partition. Unless you know what you are doing it is advisable to click
+CONTINUE to automatically perform a standard installation.
+
+After a brief pause a window should be opened stating that the installation
+has been successfully completed. At this point all the features of the
+ARMEdit suite should be available for use.
+
+Read the Docs.FrontEnd file for details of how to change the configuration or
+install other components.
+
+
+MODIFYING CONFIGURATION FILES
+
+The CONFIG.SYS and AUTOEXEC.BAT files in the PC partition require
+modification to inform DOS about ARMEdit. These files may be edited using a
+RISC OS editor, such as !Zap or !Edit, or from a DOS or Windows editor.
+
+Load the C:\CONFIG.SYS file (CONFIG/SYS from the top level directory of your
+PC partition) into your chosen editor, and add this line to the end:
+
+    DEVICE=C:\DRIVERS\3RDPARTY\ARMEDIT\ARMEDIT.SYS -long -write ADFS::4.$
+
+If you are not using Windows 95 then omit the "-long" keyword. The final path
+"ADFS::4.$" should be changed if you main harddisc is not an ADFS one. When
+finished, save and close the file. See the Docs.Device file for more details
+of the available options.
+
+If you do not have a C:\CONFIG.SYS file then create a new file containing
+just the DEVICE line listed above.
+
+Next load the C:\AUTOEXEC.BAT file (AUTOEXEC/BAT from the PC partition) into
+the same editor. You should find a line that begins with "PATH=". Append
+";C:\DRIVERS\3RDPARTY\ARMEDIT" to the end of that line. Save and close the
+file when finished.
+
+If you do not have a C:\AUTOEXEC.BAT file then create a new file
+containing just the following line (for a normal Windows 95 installation):
+
+    PATH=C:\WINDOWS;C:\WINDOWS\COMMAND;C:\DRIVERS\3RDPARTY\ARMEDIT
+
+Use the same line if the C:\AUTOEXEC.BAT file already exists but does not
+include a line beginning "PATH=".
+
+
+STARTING THE PC CARD
+
+If the standard installation process described above has been completed then
+ARMEdit should be ready for use.
+
+Firstly ensure that the "!ARMEdit" icon (a grey PC with an !Edit style pen
+over the top) is shown on the iconbar at the bottom of the screen. If it is
+not presend then double-click SELECT on the "!ARMEdit" icon in a directory
+viewer.
+
+Click MENU over the "!ARMEdit" icon on the iconbar to display the main menu.
+Select the "PC card" option to start the PC front-end. This will use the
+current configuration. However, ARMEdit allows multiple configurations to be
+defined; these will be listed on the sub-menu.
+
+
+COMMAND LINE UTILITIES
+
+ARMEdit includes several command line utilities for use from DOS. If you are
+not at a DOS prompt then obtain one, e.g. from Windows double-click on the
+MS-DOS Prompt icon.
+
+Type "OSCLI /?". This should display limited help about the OSCLI command.
+The other utilities supplied as part of the ARMEdit suite also display help
+information if "/?" is used.
+
+As indicated by the displayed help, the OSCLI command allows RISC OS
+*commands to be executed. Try typing "OSCLI CAT" to display the contents of
+the current RISC OS directory. Experiment with other commands and the
+different command line switches. However, be careful - do not try starting
+another application (such as BASIC) without using the "/T" switch. Failure to
+do this is likely to crash the computer.
+
+The other command line utilities are:
+
+    ARMEDIT     This command allows DOS text files to be edited using a
+                RISC OS editor such as !Zap or !StrongEd.
+    
+    GETFILE     This is similar to the utility of the same name supplied with
+                Acorn's software emulator, allowing RISC OS files to be
+                copied to DOS.
+    
+    PUTFILE     This is similar to the utility of the same name supplied with
+                Acorn's software emulator, allowing DOS files to be copied to
+                RISC OS.
+
+Read the corresponding documentation file for details of how to use these
+commands. Alternatively try running them with "/?" added to the end of the
+command line to obtain a description of their parameters.
+    
+
+DEVICE DRIVER
+
+If it has been installed correctly, the ARMEDIT.SYS device driver should be
+loaded, and one or more extra drive letters will be available. On a system
+with only a single hard disc partition the first drive letter used by the
+device driver would be D:. Try looking at the contents of each of the drives
+in turn; one should show files from a RISC OS hard disc.
+
+The device driver only allows the files to be read. Any modifications made
+from the PC are stored in memory; they do not affect the original files. To
+copy changes back to RISC OS it is necessary to use the PUTFILE command.
+
+
+OTHER FEATURES
+
+This guide has only skimmed the surface of the ARMEdit suite. For more
+details read the relevant sections of the documentation, e.g. Docs.FrontEnd
+for an explanation of the other features offered by the front-end, or
+Docs.Module for more technical details about the ARMEdit module itself.

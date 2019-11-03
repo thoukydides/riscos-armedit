@@ -1,0 +1,316 @@
+File        : device.txt
+Date        : 18-Apr-98
+Author      : © A.Thoukydides, 1995-1998, 2019
+Description : Description of the ARMEDIT.SYS DOS device driver.
+    
+License     : ARMEdit is free software: you can redistribute it and/or
+              modify it under the terms of the GNU General Public License
+              as published by the Free Software Foundation, either
+              version 3 of the License, or (at your option) any later
+              version.
+
+              ARMEdit is distributed in the hope that it will be useful,
+              but WITHOUT ANY WARRANTY; without even the implied warranty
+              of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+              the GNU General Public License for more details.
+
+              You should have received a copy of the GNU General Public
+              License along with ARMEdit. If not, see
+              <http://www.gnu.org/licenses/>.
+
+
+INTRODUCTION
+
+The ARMEDIT.SYS device driver allows RISC OS filesystems to be accessed like
+normal DOS drives. To use this driver it is necessary to load the ARMEdit
+module before starting the PC front-end.
+
+
+INSTALLING THE DRIVER
+
+Add a line like the following to the CONFIG.SYS file:
+
+    DEVICE=ARMEDIT.SYS [-anon] [-limit <limit>] [-long] [-manual]
+                       [-size <size>] [-write]
+                       <path1> [<path2> [<path3> [<path4>]]]
+
+where
+
+    -anon       - Force anonymous device names. This disables the automatic
+                  generation of disc volume labels based on the path being
+                  accessed. This automatically forces the -manual option,
+                  and may result in faster operation.
+
+    <limit>     - The maximum size of file, specified in megabytes, to
+                  include in the device. The default of 10MB is used if no
+                  value is specified. Use a value of 0 to allow all objects
+                  to be included regardless of size.
+
+    -long       - Enables Windows 95 long filenames. This option should not
+                  be used with earlier operating systems; the DOS filenames
+                  generated may include illegal characters.
+
+    -manual     - Disable automatic relogging of the device when files in a
+                  subdirectory of the specified path are modified. This may
+                  result in faster operation, but manual relogging will be
+                  required when modified files need to be accessed.
+
+    <size>      - The approximate size of the device, specified in megabytes.
+                  The default of 100MB is used if no value is specified. The
+                  smallest allowed size is 8.5MB, and the largest allowed
+                  size is 2047MB for Windows 95, with lower limits for other
+                  versions of DOS.
+
+    -write      - Allow the PC to write to the device. This does not affect
+                  the original RISC OS files; changes are restricted to the
+                  disc image constructed in RAM. Use this option if spurious
+                  write errors are produced.
+
+    <path1> etc - The full RISC OS pathnames for the root of each emulated
+                  device. Currently up to four paths may be specified. This
+                  limit may be increased in a future version.
+
+If the CONFIG.SYS file does not exist then create a new file containing just
+the DEVICE= line described above.
+
+The RISC OS pathnames may be prefixed by one or more of the following
+characters:
+
+    \           - Image files are treated as directories. This allows
+                  archives to be accessed via a suitable RISC OS dearchiver,
+                  e.g. SparkFS or ArcFS. It can also be used to provide
+                  read-only access to extra DOSFS partitions.
+
+    #           - Disables canonicalisation of the pathname. This allows
+                  multiple discs to be used in removable drives.
+
+If the driver is not in the root directory of the default drive then the full
+pathname should be inserted after the "=" sign.
+
+It may also be necessary to change the LASTDRIVE entry in the CONFIG.SYS file
+to support more drives.
+
+
+DIRECTORY LOGGING
+
+The device driver builds up a DOS image of the RISC OS filesystem being
+accessed. This has two side effects: Quite a lot of memory can be used, and
+changes made to the filesystem from RISC OS may not be seen by the PC.
+
+To overcome both these problems the command *ARMEdit_DevicesRelog should be
+used to clear unrequired parts of the disc log. This command does not take
+immediate effect - it waits until DOS informs the device driver that the disc
+may be changed. Hence, there should be no files open from the PC on the
+emulated device, and a simple operation should be performed (such as typing
+"DIR"), or selecting a "Refresh" option from Windows 95.
+
+The device driver attempts to automatically relog files that may have been
+altered. This behaviour may slow down operation by an unacceptable amount, in
+which case it should be disabled using the "-manual" switch described above.
+
+Unexpected disc errors, or missing files, can be due one of a number of
+limitations being reached, such as RAM or number of FAT entries. If this
+happens, and repeating the operation does not complete the operation
+successfully, then try *ARMEdit_DeviceRelog to clear the logged data.
+
+Note that the memory requirements increase if either more devices or a larger
+device size are configured. Choose the minimum device size that suits the
+application.
+
+If a Risc PC is being used, then the problem of a large amount of memory
+being used for the logged directories can be overcome by using my virtual
+memory manager Virtualise, available from Clares.
+
+
+FILENAME TRANSLATION
+
+To behave as a normal DOS device, all RISC OS filenames need to be translated
+into acceptable equivalents. This is performed in a number of steps.
+
+Firstly, the three character file extension is chosen. If the original
+filename had a DOS extension (starting with a "/" character) then this is
+used. Otherwise, the RISC OS filetype is translated using the same DOS
+mappings as used by the PUTFILE and GETFILE commands. These mappings can be
+updated using *ARMEdit_DOSMap.
+
+The individual characters of the filename are then translated, in a similar
+manner to DOSFS, to give a Windows 95 long filename. Additionally, hard
+spaces (code 160) are converted to normal spaces, and characters without a
+suitable equivalent are replaced by underscores ("_"). Any leading or
+trailing spaces are then removed.
+
+The behaviour of the final mapping to DOS 8+3 filenames depends upon whether
+long filenames have been enabled. If they have, then the mapping is
+approximately the same as used by Windows 95. Otherwise the mapping is
+similar, except that more characters are mapped to underscores.
+
+Finally, regardless of the mapping used, any duplicate DOS filenames are
+modified by the addition of a tilde and a digit, for example "~1", to ensure
+that all files have unique names.
+
+
+DRIVE LETTERS
+
+Drive letters are assigned to all block input/output devices configured for
+use. Examples of block devices are disc drives, CD-ROMs, scanners, and the
+ARMEDIT.SYS device driver. Drive letter after the C: (boot) drive may change
+when this device driver is installed.
+
+Drive letter changes can affect the access to a network, CD-ROM drives, and
+applications that reference existing drive letters.  When drive letters
+change, the following items need to be checked:
+
+    CONFIG.SYS and AUTOEXEC.BAT files need to reflect the new drive letters
+    when loading device drivers.
+    
+    The PATH statement in the AUTOEXEC.BAT file may require changes to refer
+    to the correct drives.
+    
+    Other batch files may reference the wrong drives.
+    
+    Windows .INI files, program groups, and shortcuts should be updated with
+    the new drive letter assignments.
+    
+    Rerun INSTALL or SETUP for application programs that do not allow the
+    drive letter to be changed.
+    
+    Update any network login scripts as necessary.
+    
+    Remount any compressed drives.
+
+
+PRESERVING PREVIOUS DRIVE MAPPINGS
+
+With PC-DOS (or versions of MS-DOS up to 5.0), the DOS ASSIGN command can be
+used to overcome the problem of drives changing name. As an example, if
+before using ARMEdit the CD-ROM drive was E: and a single ARMEdit device is
+added which shifts the CD-ROM to drive F: then the command
+
+    ASSIGN E=F F=E
+
+will make the CD-ROM drive appear as drive E: and the ARMEdit device as drive
+F:. Similarly, if two ARMEdit devices are added then
+
+    ASSIGN E=G F=E G=F
+
+will sort it out.
+
+There does not appear to be a good solution to the problem with MS-DOS 6 or
+Windows 95, although the SUBST command can sometimes help.
+
+With PC DOS 7 the DYNALOAD command can be used to load the driver after the
+CD-ROM drive assigments have been performed by MSCDEX. The syntax to use is:
+
+    DYNALOAD ARMEDIT.SYS [options] <path1> [<path2> [...]]
+
+This may be either typed at the command line or included in the AUTOEXEC.BAT
+file. Prefixing the line by LOADHIGH will load the driver as if it had been
+loaded with DEVICEHIGH in the CONFIG.SYS file.
+
+
+CD-ROM ACCESS
+
+Many Windows 95 CD-ROMs do not work correctly under older versions of the PC
+card software. THE ARMEDIT.SYS device driver has frequently be used to access
+these CD-ROMs when a 32bit CD-ROM driver is not available.
+
+To access CD-ROMs via the device driver it is necessary to add the CD-ROM
+driver to the list of paths that map to devices, such as:
+
+    DEVICE=ARMEDIT.SYS -limit 0 -long -write -size 1000 #CDFS::0.$
+
+There are several important points to note about the specified options:
+
+    -limit 0    Allow files of any size to be included. This is especially
+                important when accessing CD-ROMs since they frequently
+                contain extremely large data files.
+
+    -size 1000  Ensure that the size of the device is sufficiently large to
+                handle a complete CD-ROM (approximately 650MB), allowing for
+                the overhead of directory and FAT allocations.
+
+    #CDFS::0.$  The hash ("#") character disables canonicalisation of the
+                path. This allows the CD-ROM to be swapped. However, it is
+                still necessary to force a relog to recognise when the CD has
+                been changed.
+
+Note that this will not help with CD-ROMs that contain Windows 95 style long
+filenames; those require a proper Windows CD-ROM driver.
+
+
+OTHER POINTS TO NOTE
+
+Low level PC disc tools may not operate as expected on emulated devices. This
+is due to the way in which the directory structure of the device is
+dynamically constructed as it is accessed.
+
+If heavy use has been made of emulated devices then some operations, such as
+quitting the PC software, can take a surprisingly long time to complete. This
+is normal, and is due to the operation of RISC OS memory management.
+
+When used with Windows 95, the error:
+
+    Windows was unable to identify the specified real mode driver which was
+    loaded in your Config.sys file.
+
+    If you no longer need this driver, remove it from your Config.sys file,
+    Otherwise contact the manufacturer of this driver to see if a Windows
+    (protected-mode) driver is available.  Windows will not perform optimally
+    until you have done one of these things.
+
+will be displayed. This is a consequence of the driver being written for DOS.
+Ignore this error - the driver will operate correctly, will only a marginal
+effect on the performance of Windows.
+
+If any 32 bit device drivers specifically for PC cards are installed (such as
+Aleph One's protected mode CD-ROM driver, or Andreas Walter's ASPI driver)
+then add the following line to the [SafeList] section of the
+C:\WINDOWS\IOS.INI file:
+
+armedit.sys	; Alexander Thoukydides's ARMEdit device driver
+
+There are special problems that may occur when using ARMEdit on a system that
+has a Zip drive connected. David Robinson maintains a very useful web page
+giving guidance on using Zip drives with PC cards. See the Docs.Contacts file
+for the URL.
+
+
+THINGS TO DO
+
+The following are changes that may be made to the ARMEdit device driver
+sometime in the future.
+    
+    Extend the device driver's command line from the PC card software's
+    Config file.
+    
+    Support write operations.
+
+Please note that there are currently no plans to write a 32 bit Windows
+version of this driver. However, if someone is willing to provide the
+necessary development tools and information it may be considered.
+
+
+VERSION HISTORY
+
+0.00 (07-May-96)    Original development version.
+
+0.01 (27-May-96)    Support for Acorn's software PC emulator included.
+
+0.02 (13-Jun-96)    PC emulator support code corrected.
+
+1.02 (06-Aug-96)    First official release version.
+
+1.03 (21-Feb-97)    Maximum object size to include may be specified.
+                    ARMEdit_DevicesRelog now accepts a "-now" switch.
+                    Added option to disable canonicalisation of path names.
+
+1.04 (07-Dec-97)    Device marked as removable to allow relog with Windows 95.
+                    Added support for Windows 95 long filenames.
+                    More than 32MB files handled correctly.
+                    The size of the device can be configured.
+                    Sizes now specified in megabytes instead of bytes.
+
+1.05 (??-???-??)    Raw path copied if canonicalisation fails.
+                    More descriptive disc names are generated based on the path.
+                    Added automatic relogging of devices when files changed.
+                    Unique DOS filenames correctly generated.

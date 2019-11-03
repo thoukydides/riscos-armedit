@@ -1,0 +1,65 @@
+#   File        : Messages
+#   Date        : 15-May-01
+#   Author      : © A.Thoukydides, 1996-2001, 2019
+#   Description : Text messages for the ARMEdit configuration application.
+#
+#   License     : ARMEdit is free software: you can redistribute it and/or
+#                 modify it under the terms of the GNU General Public License
+#                 as published by the Free Software Foundation, either
+#                 version 3 of the License, or (at your option) any later
+#                 version.
+#
+#                 ARMEdit is distributed in the hope that it will be useful,
+#                 but WITHOUT ANY WARRANTY; without even the implied warranty
+#                 of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+#                 the GNU General Public License for more details.
+#
+#                 You should have received a copy of the GNU General Public
+#                 License along with ARMEdit. If not, see
+#                 <http://www.gnu.org/licenses/>.
+
+# General messages
+_TaskName:ARMEdit Config
+
+# Serious error handling
+SigBut:Continue,Quit
+SigTpl:%0 Click Continue to attempt to carry on, or Quit to exit immediately.
+SigTplO:%0 Click OK to attempt to carry on, or Cancel to exit immediately.
+SigFPE:An arithmetic exception has occurred.
+SigIll:An illegal instruction has been executed.
+SigSegV:A bad memory access has occurred.
+SigStak:A stack overflow has occurred.
+SigErr:An unexpected error has occurred: '%0'
+SigUnk:An unexpected error has occurred.
+
+# Application specific messages
+QuitConfig:The configuration has been modified but not saved. Do you wish to abandon the changes and quit?
+QuitInstall:The installation has not been completed. Do you wish to discard the current state and quit?
+CfgSave:Unable to write the configuration file. Ensure that the disc is not write protected, and try again.
+InstSave:Unable to write the installation options file. Ensure that the disc is not write protected, and try again.
+InstBadPC:The specified PC card front-end path does not appear to be valid
+InstBadConfig:The specified PC card configuration tool path does not appear to be valid
+InstBadPart:The specified PC partition path does not appear to be valid
+InstErr:%0 (%1)
+InstType:%0. If the object is on a removable drive, then please ensure that the required disc is in the drive
+InstPathNew:%0. Would you prefer to Correct the path, or Ignore the problem?
+InstPathOld:%0. Click OK to accept the current path, or Cancel to change it.
+InstPathBut:Correct,Ignore
+InstFile:The %0 file does not exist in the specified directory
+InstFileNew:%0. Should a New %1 file be created, or would you prefer to Change the path?
+InstFileOld:%0. Click OK to create a new %1 file, or Cancel to change the path.
+InstFileBut:New,Change
+InstPath:The AUTOEXEC.BAT file may require modification to extend the search path. This is necessary to allow the DOS utilities to be run from a command prompt.
+InstDevice:The CONFIG.SYS file may require modification to load and configure the ARMEDIT.SYS device driver.
+InstDOSDrive:A full DOS path should start with a drive specification, such as 'C:'
+InstDOSRoot:A full DOS path should reference the root directory by placing a backslash after the drive specification, for example '%0:\'
+InstDOSNew:%0. Would you prefer to Correct the path, or Ignore this advice?
+InstDOSOld:%0. Click OK to accept the current path, or Cancel to change it.
+InstDOSBut:Correct,Ignore
+ZipRun:The UnZip utility could not be executed. Try to free some memory and then try again.
+ZipDirFile:'%0' is a file. The destination must be a directory.
+ZipDirNew:The directory '%0' does not exist. Create the directory or Abandon the installation?
+ZipDirOld:The directory '%0' does not exist. Click OK to create the directory, or Cancel to abandon the installation.
+ZipDirBut:Create,Abandon
+ZipDirAbort:The directory has not been created. Installation abandoned.
+EditActive:Save or discard any changes to configuration being edited and then try again.

@@ -1,0 +1,540 @@
+File        : frontend.txt
+Date        : 18-Apr-98
+Author      : © A.Thoukydides, 1996-1998, 2019
+Description : Description of the WIMP front-end "!ARMEdit" that is part of
+              the ARMEdit suite.
+    
+License     : ARMEdit is free software: you can redistribute it and/or
+              modify it under the terms of the GNU General Public License
+              as published by the Free Software Foundation, either
+              version 3 of the License, or (at your option) any later
+              version.
+
+              ARMEdit is distributed in the hope that it will be useful,
+              but WITHOUT ANY WARRANTY; without even the implied warranty
+              of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+              the GNU General Public License for more details.
+
+              You should have received a copy of the GNU General Public
+              License along with ARMEdit. If not, see
+              <http://www.gnu.org/licenses/>.
+
+
+INTRODUCTION
+
+The "!ARMEdit" front-end adds functionality to the ARMEdit suite. It is
+necessary for the operation of some, but not all, of the other components,
+and is used for installing files into the PC partition. The front-end
+supports interactive help; use Acorn's !Help application to obtain
+information about the item under the mouse pointer.
+
+The utilities that use this front-end are:
+
+    ARMEDIT.COM     The front-end is required to use the External Data
+                    Editing Protocol.
+
+    OSCLI.COM       The front-end is used for executing *commands in a
+                    RISC OS TaskWindow.
+
+    PUTFILE.COM     The front-end is used for the "Save as" method of
+                    specifying a destination filename.
+
+
+STARTING THE PROGRAM
+
+Start the front-end by simply double-clicking SELECT on the "!ARMEdit" icon
+in a directory viewer. After a short delay the application icon will appear
+on the icon-bar. If no valid configuration can be found then the installer
+will be automatically started.
+
+The front-end may be loaded at any time, before or after the PC software has
+been started.
+
+If the banner window is found to be annoying, then it may be disabled by
+commenting out the last line of the "!ARMEdit.!Run" file (by placing a "|"
+character before the "Run" statement). Please do not distribute this software
+with the banner disabled - always copy the original files.
+
+
+THE ICON BAR
+
+Clicking MENU on the icon which appears on the iconbar opens the main program
+menu which offers the following options:
+
+    Info            Moving over the sub-menu arrow displays a standard
+                    program information window. The version number should be
+                    the same as the version of the ARMEdit module being used.
+                    Leaving the window open for 5 seconds will show some
+                    other messages.
+
+    PC card         Clicking SELECT starts the configured PC card front-end
+                    software using the current PC card configuration. Moving
+                    over the sub-menu arrow displays a list of named
+                    configurations. Clicking SELECT on one of the
+                    configurations will activate that configuration, and then
+                    start the PC card software.
+
+    Speed...        Clicking SELECT or moving over the sub-menu arrow displays
+                    a dialogue box allowing the multitasking speed of the PC
+                    card to be controlled.
+
+    Relog devices   Clicking SELECT forces a relog of any ARMEDIT.SYS devices.
+                    Moving over the sub-menu arrow and selecting the "Now"
+                    option forces an immediate relog. These options are
+                    equivalent to using the *ARMEdit_DevicesRelog command
+                    without or with the "-now" switch.
+
+    Install...      Clicking SELECT opens up a dialogue box that allows
+                    extra ARMEdit components to be installed or reconfigured.
+
+    Configure...    Clicking SELECT opens up a dialogue box that allows
+                    ARMEdit to be configured.
+                    
+    Quit            Quits the front-end program. The module is not affected.
+
+
+SPEED CONTROL WINDOW
+
+The PC card speed control window allows the multitasking speed of the PC card
+to be controlled. This provides a convenient interface to the
+*ARMEdit_Polling command. The speed may be set independently for when the PC
+window has got the input focus (foreground) and when it has not got the focus
+(background).
+
+When the option buttons are not selected the default speed is used. Clicking
+SELECT on an option button allows the speed to be adjusted. Dragging the
+sliders to the right increases the performance of the PC card at the expense
+of slowing down the desktop.
+
+Recent versions of the PC card software include options for adjusting the
+multitasking speed directly; these should be used in preference to the
+facilities provided by ARMEdit.
+
+
+INSTALLATION WINDOW
+
+When the "!ARMEdit" front-end is started for the first time, or when the
+"Install..." option is selected from the iconbar menu without a saved
+configuration, a simple installation procedure is started. This prompts for
+vital information before allowing either a standard or custom installation to
+be performed.
+
+Selecting the "Install..." option after a configuration has been saved allows
+a new custom installation to be performed or an existing one modified.
+
+The installation may be aborted at any time by selecting the CANCEL option,
+and restarted at a later time by reselecting the "Install..." option from the
+iconbar menu. The configuration may also be changed by selecting the
+"Configure..." option.
+
+
+INSTALLATION WINDOW: WELCOME
+
+The first installation window displays a welcome message and allows the
+interactive help viewer to be started. The buttons at the bottom of the
+window are:
+
+    Cancel          Abort the installation without saving a configuration.
+    
+    Help            Start the "!Help" application to display interactive
+                    help. This displays information about the item under the
+                    pointed.
+    
+    Continue        Advance to the next stage of the installation process.
+
+
+INSTALLATION WINDOW: CONFIGURATION COMPLETE
+
+After completing the basic installation it is still necessary to copy some
+files into the PC partition. The buttons at the bottom of the window are:
+
+    Cancel          Abort the installation after saving the configuration
+                    but before installing files into the PC partition.
+    
+    Custom          Perform a custom installation. This allows selection of
+                    the components to install, as well as allowing the
+                    destination directories and other options to be selected.
+                    Selecting the "Install..." option from the iconbar menu
+                    has the same effect.
+    
+    Continue        Perform a standard installation. This copies the DOS
+                    utilities and device driver to
+                    "C:\Drivers\3rdParty\ARMEdit" and modifies the
+                    AUTOEXEC.BAT and CONFIG.SYS files as required.
+
+The files may be installed manually by using SparkFS or Info-ZIP's UnZip
+utility to decompress the archives stored in the "!ARMEdit.Install"
+directory:
+
+    CodeARM         RISC OS SWI veneers to the ARMEdit SWIs.
+    
+    CodePC          PC header and library files allowing extra utilities to
+                    be written.
+    
+    Device          The ARMEDIT.SYS device driver.
+    
+    Utilities       The DOS command line utilities.
+
+
+INSTALLATION WINDOW: OPTIONS
+
+Selecting the "Install..." menu option after a configuration file has been
+saved, or clicking on the CUSTOM button allows one or more components to be
+installed. The available components are:
+
+    Command line utilities
+    
+                    This option copies the DOS command line utilities into
+                    the PC partition. The AUTOEXEC.BAT file will also require
+                    modification to add the utilities to the DOS search path.
+    
+    DOS device driver
+    
+                    This option copies the ARMEDIT.SYS device driver into the
+                    PC partition. The CONFIG.SYS file will also require
+                    modification to load and configure the device driver.
+    
+    RISC OS veneers for ARMEdit SWIs
+    
+                    This option allows veneers to the ARMEdit SWIs to be
+                    copied to a user specified directory.
+    
+    PC header and library files
+    
+                    This option allows the PC software development header and
+                    library files to be copied to a user specified directory.
+
+There are also two buttons at the bottom of the window:
+
+    Cancel          Abort the installation without installing any components.
+    
+    Install         Install the selected components. This will then prompt
+                    for any require details.
+
+
+CONFIGURATION WINDOW
+
+The top area of the configuration window shows an icon for each area of
+ARMEdit that may be configured. Clicking on an icon will open another window
+allowing relevant options to be adjusted. The icons are:
+
+    Front-end       Configuration options specific to the !ARMEdit front-end
+                    application.
+    
+    Speed control   Control of the multitasking speed of the PC card.
+    
+    Paths           Default paths for the PC card front-end, configuration
+                    utility and primary DOS partition. These are used for the
+                    multiple named configurations.
+    
+    Configurations  Configuration of multiple named PC card configurations.
+
+    Auto run        Specify obey files to run when the PC card is reset or
+                    quit.
+
+There are also two buttons at the bottom of the window:
+
+    Save            Save and use the modified configuration. The changes will
+                    also be used when !ARMEdit is started in the future.
+    
+    Cancel          Abandon any changes. If ADJUST is used then the
+                    configuration window(s) are kept open, and the previously
+                    saved configuration is restored.
+
+
+CONFIGURATION WINDOW: FRONT-END
+
+A single option is supported for configuring the !ARMEdit front-end:
+
+    Quit with PC software
+    
+                    Selecting this option will result in the front-end
+                    quitting at the same time as the PC software. This is
+                    useful if the application is started automatically when
+                    the PC software is run.
+
+
+CONFIGURATION WINDOW: SPEED CONTROL
+
+The default multitasking speed of the PC card can be set in this window.
+
+    Foreground      This is the setting to use when the PC card has the input
+                    focus.
+    
+    Background      This is the setting to use when the PC card has not got
+                    the input focus.
+
+Clicking on the READ CURRENT icon will set the icons from the currently
+active speed. This can be useful if the main speed control option has been
+used to set the required speed.
+
+These options should be left disabled when used with a version of the PC card
+software that provides mode direct control over the multitasking speed.
+
+
+CONFIGURATION WINDOW: PATHS
+
+This window allows the default application paths to be specified. The
+writable fields may be typed into directly, or alternatively the relevant
+icon may be dragged from a filer window and dropped in the appropriate place.
+The required paths are:
+
+    PC card front-end software
+    
+                    This is the PC card front-end software, e.g. !PC, !PCx86
+                    or !PC486.
+    
+    Configuration tool software
+    
+                    This is the associated application used to edit the PC
+                    card configuration, e.g. !PCconfig.
+    
+    Primary partition or direct SCSI
+    
+                    This is the main PC partition. If a direct SCSI DOS
+                    device is being used then the path of the root directory
+                    should be typed, e.g. "SCSI::4.$". Direct SCSI DOS
+                    devices are only supported if they can be accessed via
+                    DOSFS or Win95FS.
+
+
+CONFIGURATION WINDOW: CONFIGURATIONS
+
+The multiple PC card configurations offered by the main !ARMEdit menu can be
+viewed or configured using this window. The top section of the window
+contains a single option:
+
+    Include DOS files
+    
+                    Selecting this option causes CONFIG.SYS and AUTOEXEC.BAT
+                    to be automatically included with copies of the
+                    "Current configuration".
+
+The main area of the window allows the actual configurations to be edited.
+At the top is a writable icon giving the name of the selected configuration.
+The name of any configuration (other than the "Current configuration") may be
+changed by simply typing a new name into the icon.
+
+Clicking SELECT on the popup button to the right of the configuration name,
+or MENU anywhere in the window, opens a menu giving a couple of options and
+a list of the defined configurations. The options are:
+
+    Copy            Create a copy of the selected configuration. The copy is
+                    as exact duplicate of the existing configuration, except
+                    when the "Current configuration" is selected. When the
+                    current configuration is copied it is given the name
+                    "New configuration" and the "Include DOS files" option
+                    is used.
+    
+    Delete          Delete the selected configuration. The current
+                    configuration cannot be deleted.
+
+Clicking on one of the configuration names selects that configuration for
+editing.
+
+Below the configuration name some icons are shown. Clicking on an icon will
+either perform an action or open another window allowing aspects of the
+configuration to be edited. The icons are:
+
+    Config utility  Clicking on this icon will start the PC card configuration
+                    tool to edit the selected configuration. The application
+                    to use may be changed in either the global or
+                    configuration specific paths option.
+    
+    Text editor     Clicking on this icon loads the selected configuration
+                    into a text editor. This uses the External Data Editing
+                    Protocol, so !Edit is not supported. Use this to include
+                    non-standard options in the configuration.
+    
+    Paths           Open a window allowing the paths specific to this
+                    application to be changed.
+    
+    DOS files       Open a window listing the DOS files associated with the
+                    selected configuration. This allows the list to be
+                    changed, and for the copies of the files to be updated.
+
+CONFIGURATION WINDOW: CONFIGURATIONS - PATHS
+
+This window allows the application paths associated with a configuration to
+be specified. This is similar to the default paths window; the main
+difference being that the window is split into two sections with associated
+radio buttons:
+
+    Use default paths
+
+                    Selecting this option uses the default paths for this
+                    configuration.
+    
+    Specify other   Selecting this option allows the paths to be changed for
+                    this configuration.
+
+Each configuration may have its own independent path settings.
+
+
+CONFIGURATION WINDOW: CONFIGURATIONS - DOS FILES
+
+The top half of this window lists the DOS files associated with the selected
+configuration. If a file is referenced with respect to the primary partition
+then the partition path is displayed in grey. Click on the name of a file to
+select it.
+
+The lower half of the window allows the details of a file to be viewed or
+changed. The writable field may be typed into directly, or alternatively the
+relevant icon may be dragged from a filer window and dropped on the arrow.
+The "Name is relative to partition" option controls whether the primary
+partition path should be prefixed to the filename.
+
+There are two special buttons near the bottom of the window:
+
+    Remove          Remove the selected file from the configuration.
+    
+    Update copies   Make new copies of the files associated with this
+                    configuration. This should be used after adding any files
+                    to store a copy with the configuration.
+
+Users of Windows 95 may find it useful to include MSDOS/SYS as one of the
+files that is associated with each configuration. There are several items
+that can be included in the [Options] section:
+
+    BootGUI         The default value of 1 starts Windows 95, but changing it
+                    to 0 results in the command prompt being started.
+
+    BootMenu        Set this to 1 to automatically show the startup menu,
+                    normally obtained by pressing F8.
+
+    BootWin         Specifying 1 starts Windows 95 as usual, but a value of
+                    0 enables the previous operating system if present.
+
+    BootDelay       This specifies how long, in seconds, Windows 95 waits for
+                    a function key to be pressed before starting if the
+                    startup menu is not displayed.
+
+    BootMenuDelay   This is similar to BootDelay except that it applies to
+                    the startup menu. This sets how long, in seconds, Windows
+                    95 waits before running the highlighted menu option.
+
+Remember to unlock the MSDOS/SYS file to allow !ARMEdit to overwrite it.
+
+Be very careful configuring ARMEdit to replace the MSDOS/SYS file if you ever
+boot to a previous version of DOS - it will result in a vital system file
+being overwritten. You have been warned!
+
+
+CONFIGURATION WINDOW: AUTO RUN
+
+This window allows obey files to be specified that can be executed
+automatically at various times. There are three sections to the window.
+
+The first section "ARMEdit front-end events" relates to when the !ARMEdit
+front-end is started or quit:
+
+    After ARMEdit has been loaded
+    
+                    This file is run after !ARMEdit has been succesfully
+                    started. It could be used to automatically start the PC
+                    card front-end software, or to load any related
+                    utilities.
+    
+    Before ARMEdit is quit
+    
+                    This file is run just before !ARMEdit exits. It could
+                    be used to automatically quit any related utilities.
+
+The next section "Before launching PC front-end" allows a file to be run
+before the PC front-end is launched:
+
+    Prepare for PC to start
+    
+                    This file is run immediately before the PC front-end
+                    software is started. It could be used to initialise any
+                    hardware used by the PC card, such as dismounting direct
+                    SCSI DOS discs.
+
+The final section "PC card message events" allows files to be executed when
+various PC card events occur:
+
+    PC card booting or reset
+    
+                    This file is run when the PC card is either booted or
+                    reset. It could be used to ensure that other support
+                    software, such as !PCEx is loaded.
+    
+    PC card front-end has quit
+    
+                    This file is run when the PC card front-end is quit.
+                    The default file kills any PC related modules that are
+                    not needed when the PC card is not being used.
+
+The writable fields may be typed into directly, or alternatively the relevant
+icon may be dragged from a filer window and dropped in the appropriate place.
+
+Note that the obey files will only be executed when the desktop is active.
+However, if the PC card is running in single-tasking mode, then one obey file
+may be run when the desktop is reentered.
+
+
+THINGS TO DO
+
+The following are changes that may be made to the !ARMEdit front-end sometime
+in the future.
+
+    Handle multiple configuration as supported by newer versions of PCPro
+    better. This will require a list of known versions of !PC and their paths
+    to be maintained.
+
+    Finish implementing the installer, for example modifying CONFIG.SYS and
+    AUTOEXEC.BAT files. Add an option to only show the changes to the
+    configuration files.
+    
+    Allow direct SCSI devices to be specified easier. Ideally this would set
+    the paths directly from the PC card configuration files.
+    
+    Load a configured text editor if external edit messages returned.
+    
+
+VERSION HISTORY
+
+0.00 (10-Sep-96)    Original development version.
+
+0.01 (11-Sep-96)    Added ability to set cursor position of external edits.
+                    "Save as" window added for PUTFILE command.
+
+0.02 (03-Oct-96)    Icons resized to contain complete text with system font.
+                    Menu closed before exiting to avoid bug in Toolbox code.
+                    Unused Toolbox modules no longer loaded.
+                    Added support for multiple PC card configurations.
+
+0.03 (09-Oct-96)    Fixed SaveAs window handling for PUTFILE utility.
+                    Moved configuration editor to a different executable.
+
+0.04 (17-Oct-96)    Child tasks started indirectly to avoid Toolbox problems.
+
+0.05 (19-Dec-96)    External edits of configuration files clear modified flags.
+                    Rewritten and improved multiple configuration handling.
+                    Some new sprites within configuration editor.
+
+0.06 (24-Dec-96)    PC front-end booted before starting configuration editor.
+                    Modified paths used by configurations editor before save.
+
+0.07 (17-Jan-97)    Added menu options to force a relog of the device driver.
+
+0.08 (05-Feb-97)    Obey files can be automatically run when PC booted or quit.
+
+0.09 (10-Feb-97)    Corrected copyright message.
+
+1.03 (21-Feb-97)    First official release version.
+
+1.04 (07-Dec-97)    Supports execution of commands in TaskWindows for OSCLI.
+                    Extra auto-run Obey files can be specified.
+                    Configuration windows enlarged to show filenames better.
+                    Updated banner displayed during loading.
+                    Installer option added.
+                    Longer configuration names allowed.
+                    Sliders are used to adjust the speed control settings.
+                    Removed option to automatically include DOS files.
+
+1.04b (11-Dec-97)   Fixed bug that prevented the installer from working.
+
+1.05 (??-???-??)    Corrected loading sequence for Toolbox modules.
+                    Fixed quitting with external edits active.
+                    Reduced memory requirements by changing libraries.

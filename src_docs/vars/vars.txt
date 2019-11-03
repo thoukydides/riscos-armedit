@@ -1,0 +1,41 @@
+File        : oscli.txt
+Date        : 19-May-01
+Author      : © A.Thoukydides, 2001, 2019
+Description : Description of system variables used by ARMEdit.
+    
+License     : ARMEdit is free software: you can redistribute it and/or
+              modify it under the terms of the GNU General Public License
+              as published by the Free Software Foundation, either
+              version 3 of the License, or (at your option) any later
+              version.
+
+              ARMEdit is distributed in the hope that it will be useful,
+              but WITHOUT ANY WARRANTY; without even the implied warranty
+              of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+              the GNU General Public License for more details.
+
+              You should have received a copy of the GNU General Public
+              License along with ARMEdit. If not, see
+              <http://www.gnu.org/licenses/>.
+
+
+SYSTEM VARIABLES
+
+The ARMEdit module sets and uses the following system variables:
+
+    ARMEdit$Path
+    
+        Path used to access Messages file. This is normally set to point to
+        the file contained within the module and placed in ResourceFS.
+        
+    
+    ARMEdit$ScrapDir
+    
+        Directory used for temporary files. This is normally set to
+        <Wimp$Scrap>.ARMEdit, but may be changed if required. If there is
+        sufficient memory in the computer then better performance would
+        result from placing this in a RAM disc.
+        
+        The module sets and uses this variable (if not already defined)
+        during initialisation. Hence it is necessary for <Wimp$Scrap> to be
+        defined before the module is loaded.

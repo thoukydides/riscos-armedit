@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!-- File        : hpc/fopen.html -->
+<!-- Date        : 15-Jul-01 -->
+<!-- Author      : © Alexander Thoukydides, 2001 -->
+<!-- Description : Part of the ARMEdit documentation. -->
+<HTML>
+<HEAD>
+<TITLE>ARMEdit Documentation - HPC Services [HPC_ARMEDIT_FOPEN]</TITLE>
+<LINK REV=MADE HREF="mailto:armedit@thouky.co.uk">
+<LINK REL=PARENT HREF="index.html">
+<META NAME=DESCRIPTION CONTENT="ARMEdit Documentation - HPC Services [HPC_ARMEDIT_FOPEN]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#004499" ALINK="#FF0000">
+<CENTER>
+<H1><FONT COLOR="#004499"><B><I>ARMEdit</I></B></FONT>: HPC Services</H1>
+<B>HPC_ARMEDIT_FOPEN</B> </CENTER>
+<HR>
+<TABLE WIDTH="100%"><TR><TD COLSPAN=4 ALIGN=RIGHT><FONT COLOR="#DD0000"><TT><B>HPC_ARMEDIT_FOPEN</B></TT><BR><TT>(HPC&nbsp;&amp;0105:&amp;0007)</TT></FONT></TD></TR><TR VALIGN=TOP><TD></TD><TD COLSPAN=3>Open a RISC OS file</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Data&nbsp;sent:</B></FONT></TD><TD>0</TD><TD COLSPAN=2>HPC service ID = &amp;0105</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+2</TD><TD COLSPAN=2>reason code = &amp;0007</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+4</TD><TD COLSPAN=2></TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Data&nbsp;returned:</B></FONT></TD><TD>0</TD><TD COLSPAN=2><A HREF="rc.html" TITLE="Return Code">return code</A></TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>+4</TD><TD COLSPAN=2></TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Use:</B></FONT></TD><TD COLSPAN=3>
+Open a RISC OS file. This is automatically closed when the PC is shutdown or reset, but it is better to close it when no longer required using HPC_ARMEDIT_CLOSE. A file opened using this call should not be closed using RISC OS routines directly.
+</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Related&nbsp;services:</B></FONT></TD><TD COLSPAN=3></TD></TR>
+</TABLE>
+Data sent:
+Offset Size Description
+0 2 HPC service ID.
+2 2 Reason code = &0007.
+4 4 -1 to open existing file, or initial size of file to
+create a new one.
+8 4 Non-zero to automatically delete file when closed.
+12 n Name of file to open.
+Data returned:
+Offset Size Description
+0 4 Return code.
+4 4 RISC OS file handle.
+<HR> <TABLE WIDTH="100%">
+<TR VALIGN=TOP>
+<TD>
+[<A HREF="../index.html" TITLE="Contents">Contents</A>]
+[<A HREF="index.html" TITLE="Up">Up</A>]
+</TD>
+<TD ALIGN=RIGHT>
+<FONT SIZE=-1><I> <A HREF="../legal/copy.html" TITLE="Copyright">Copyright</A> &copy; <A HREF="mailto:armedit@thouky.co.uk" TITLE="Send Email to Alexander Thoukydides">Alexander Thoukydides</A>, 2001</I></FONT>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

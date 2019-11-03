@@ -1,0 +1,26 @@
+File        : clientids.txt
+Date        : 27-Jan-97
+Author      : © A.Thoukydides, 1995-1998, 2019
+Description : List of allocated ARMEdit client identifiers.
+    
+License     : ARMEdit is free software: you can redistribute it and/or
+              modify it under the terms of the GNU General Public License
+              as published by the Free Software Foundation, either
+              version 3 of the License, or (at your option) any later
+              version.
+
+              ARMEdit is distributed in the hope that it will be useful,
+              but WITHOUT ANY WARRANTY; without even the implied warranty
+              of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+              the GNU General Public License for more details.
+
+              You should have received a copy of the GNU General Public
+              License along with ARMEdit. If not, see
+              <http://www.gnu.org/licenses/>.
+
+
+0 PC software
+1 Broadcast messages
+2-255 Development purposes only
+256 !ARMEdit
+257 Doze (Matthew Bloch)

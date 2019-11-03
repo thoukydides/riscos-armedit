@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!-- File        : swi/trply.html -->
+<!-- Date        : 28-May-01 -->
+<!-- Author      : © Alexander Thoukydides, 2001 -->
+<!-- Description : Part of the ARMEdit documentation. -->
+<HTML>
+<HEAD>
+<TITLE>ARMEdit Documentation - SWI Calls [ARMEdit_TalkReply]</TITLE>
+<LINK REV=MADE HREF="mailto:armedit@thouky.co.uk">
+<LINK REL=PARENT HREF="index.html">
+<META NAME=DESCRIPTION CONTENT="ARMEdit Documentation - SWI Calls [ARMEdit_TalkReply]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#004499" ALINK="#FF0000">
+<CENTER>
+<H1><FONT COLOR="#004499"><B><I>ARMEdit</I></B></FONT>: SWI Calls</H1>
+<B>ARMEdit_TalkReply</B> </CENTER>
+<HR>
+<TABLE WIDTH="100%"><TR><TD COLSPAN=4 ALIGN=RIGHT><FONT COLOR="#DD0000"><TT><B>ARMEdit_TalkReply</B></TT><BR><TT>(SWI&nbsp;&amp;4BC48)</TT></FONT></TD></TR><TR VALIGN=TOP><TD></TD><TD COLSPAN=3>Reply to a message from another client task</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>On&nbsp;entry:</B></FONT></TD><TD>R0&nbsp;=</TD><TD COLSPAN=2>client handle for this task</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>R1&nbsp;=</TD><TD COLSPAN=2>the client handle for the recipient</TD></TR>
+<TR VALIGN=TOP><TD></TD><TD>R2&nbsp;=</TD><TD COLSPAN=2>pointer to block containing the message to send</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>On&nbsp;exit:</B></FONT></TD><TD COLSPAN=3>Registers preserved</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Interrupts:</B></FONT></TD><TD COLSPAN=3>Interrupt status is undefined<BR>Fast interrupts are enabled</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Processor&nbsp;mode:</B></FONT></TD><TD COLSPAN=3>Processor is in SVC mode</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Re-entrancy:</B></FONT></TD><TD COLSPAN=3>SWI is not re-entrant</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Use:</B></FONT></TD><TD COLSPAN=3>
+This is like <TT><A HREF="ttx.html" TITLE="ARMEdit_TalkTX">ARMEdit_TalkTX</A></TT>, except that the message is stored in the destination task's message buffer. The destination task must be specified by it's client handle; it is not possible to send the message to an ID.
+<P>
+The main use of this call is to support the easy creation of RISC OS tasks acting as a server for multiple PC tasks.
+</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Related&nbsp;SWIs:</B></FONT></TD><TD COLSPAN=3><TT><A HREF="tstrt.html" TITLE="ARMEdit_TalkStart">ARMEdit_TalkStart</A></TT>, <TT><A HREF="tend.html" TITLE="ARMEdit_TalkEnd">ARMEdit_TalkEnd</A></TT>, <TT><A HREF="ttx.html" TITLE="ARMEdit_TalkTX">ARMEdit_TalkTX</A></TT>, <TT><A HREF="trx.html" TITLE="ARMEdit_TalkRX">ARMEdit_TalkRX</A></TT>, <TT><A HREF="tack.html" TITLE="ARMEdit_TalkAck">ARMEdit_TalkAck</A></TT></TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Related&nbsp;vectors:</B></FONT></TD><TD COLSPAN=3>None</TD></TR>
+</TABLE>
+<HR> <TABLE WIDTH="100%">
+<TR VALIGN=TOP>
+<TD>
+[<A HREF="../index.html" TITLE="Contents">Contents</A>]
+[<A HREF="index.html" TITLE="Up">Up</A>]
+</TD>
+<TD ALIGN=RIGHT>
+<FONT SIZE=-1><I> <A HREF="../legal/copy.html" TITLE="Copyright">Copyright</A> &copy; <A HREF="mailto:armedit@thouky.co.uk" TITLE="Send Email to Alexander Thoukydides">Alexander Thoukydides</A>, 2001</I></FONT>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

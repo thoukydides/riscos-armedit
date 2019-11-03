@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!-- File        : command/devre.html -->
+<!-- Date        : 28-May-01 -->
+<!-- Author      : © Alexander Thoukydides, 2001 -->
+<!-- Description : Part of the ARMEdit documentation. -->
+<HTML>
+<HEAD>
+<TITLE>ARMEdit Documentation - *Commands [*ARMEdit_DevicesRelog]</TITLE>
+<LINK REV=MADE HREF="mailto:armedit@thouky.co.uk">
+<LINK REL=PARENT HREF="index.html">
+<META NAME=DESCRIPTION CONTENT="ARMEdit Documentation - *Commands [*ARMEdit_DevicesRelog]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#004499" ALINK="#FF0000">
+<CENTER>
+<H1><FONT COLOR="#004499"><B><I>ARMEdit</I></B></FONT>: *Commands</H1>
+<B>*ARMEdit_DevicesRelog</B> </CENTER>
+<HR>
+<TABLE WIDTH="100%"><TR><TD COLSPAN=4 ALIGN=RIGHT><FONT COLOR="#DD0000"><TT><B>*ARMEdit_DevicesRelog</B></TT></FONT></TD></TR><TR VALIGN=TOP><TD></TD><TD COLSPAN=3>Discard the device driver directory cache</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Syntax:</B></FONT></TD><TD COLSPAN=3><TT>*ARMEdit_DevicesRelog [-now]</TT></TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Parameters:</B></FONT></TD><TD><TT>-now&nbsp;</TT></TD><TD COLSPAN=2>force immediate reset</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Use:</B></FONT></TD><TD COLSPAN=3>
+Force a relog of the RISC OS directory structure. This releases most of the memory claimed to support device driver operation and closes open files.
+<P>
+Note that this may not take immediate effect - DOS must acknowledge a change of disc before any relog occurs. This normally occurs if no files are open on the device, and a simple operation (such as typing DIR) is performed on the drive. Note that each emulated device is treated seperately; some devices may be reset before others.
+<P>
+The -now switch forces an immediate reset. This should only be used if essential, and must never be used in the middle of a disc access, otherwise DOS could be confused by an inconsistent disc image.
+<P>
+It can be useful to call this from the DOS command line using the OSCLI command (supplied as part of the <FONT COLOR="#004499"><B><I>ARMEdit</I></B></FONT> suite) - perhaps it should be placed in a DOS batch file for easier use.
+</TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Example:</B></FONT></TD><TD COLSPAN=3><TT>*ARMEdit_DevicesRelog</TT></TD></TR>
+<TR VALIGN=TOP><TD COLSPAN=4><BR></TD></TR><TR VALIGN=TOP><TD NOWRAP><FONT COLOR="#DD0000"><B>Related&nbsp;commands:</B></FONT></TD><TD COLSPAN=3>None</TD></TR>
+</TABLE>
+<HR> <TABLE WIDTH="100%">
+<TR VALIGN=TOP>
+<TD>
+[<A HREF="../index.html" TITLE="Contents">Contents</A>]
+[<A HREF="index.html" TITLE="Up">Up</A>]
+</TD>
+<TD ALIGN=RIGHT>
+<FONT SIZE=-1><I> <A HREF="../legal/copy.html" TITLE="Copyright">Copyright</A> &copy; <A HREF="mailto:armedit@thouky.co.uk" TITLE="Send Email to Alexander Thoukydides">Alexander Thoukydides</A>, 2001</I></FONT>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

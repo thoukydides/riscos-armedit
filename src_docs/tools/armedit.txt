@@ -1,0 +1,95 @@
+File        : armedit.txt
+Date        : 18-Apr-98
+Author      : © A.Thoukydides, 1996-1998, 2019
+Description : Description of the PC ARMEDIT command that is part of the
+              ARMEdit suite.
+    
+License     : ARMEdit is free software: you can redistribute it and/or
+              modify it under the terms of the GNU General Public License
+              as published by the Free Software Foundation, either
+              version 3 of the License, or (at your option) any later
+              version.
+
+              ARMEdit is distributed in the hope that it will be useful,
+              but WITHOUT ANY WARRANTY; without even the implied warranty
+              of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+              the GNU General Public License for more details.
+
+              You should have received a copy of the GNU General Public
+              License along with ARMEdit. If not, see
+              <http://www.gnu.org/licenses/>.
+
+
+INTRODUCTION
+
+The "ARMEDIT" command allows DOS files to be edited using a RISC OS editor.
+To use this command it is necessary to load the ARMEdit module before
+starting the PC front-end, and to have both the !ARMEdit front-end and a
+suitable RISC OS editor running.
+
+The External Data Editing Protocol is used to control the edit. Both !Zap and
+!StrongEd support this protocol (see comments below), but unfortunately !Edit
+does not.
+
+
+USAGE
+
+The syntax is:
+
+    ARMEDIT [/?] <file> [<file> [...]]
+    ARMEDIT [/?] /L <file> [<line> [<file> [<line> [...]]]]
+
+where
+
+    /?              - Displays some help text.
+    /L              - Filenames are followed by line numbers.
+    <file>          - Wildcarded name of the files to edit.
+    <line>          - Line number to position cursor at.
+
+All files are treated as text files (RISC OS type &FFF) when being edited.
+
+
+USE WITH ZAP
+
+!Zap uses several techniques for choosing the mode to edit a file in. These
+include using the filetype, filename and the contents of the file. Due to the
+operation of the External Data Editing Protocol, only the file leaf name is
+available. Hence, to enable selection of editing modes the following lines
+should be placed at the start of the !Zap.Keys file:
+
+&500	&FFF	\#\*/c			+C
+&500	&FFF	\#\*/cc			+C
+&500	&FFF	\#\*/c++		+C
+&500	&FFF	\#\*/h			+C
+&500	&FFF	\#\*/asm		+Assembler
+
+Other mappings can be added in a similar fashion. Files that do not match any
+of the patterns will be placed in the configured default mode (usually Text).
+
+Note that !Zap will not automatically recognise DOS files and perform line end
+mappings. This is because with the External Data Editing Protocol a blank
+buffer is initially created, with the file contents being added later; it is
+not possible to recognise the file type from the initial blank buffer.
+
+
+USE WITH STRONGED
+
+Some versions of !StrongEd do not support The External Data Editing Protocol
+correctly. If you experience problems with the ARMEDIT utility still polling
+edits that have been ended, then try upgrading to the latest version of
+!StrongEd.
+
+
+OTHER POINTS TO NOTE
+
+If a suitable editor is not running, then the command will exit without
+giving an error message - no attempt is made to automatically load a suitable
+editor.
+
+Filenames may contain standard DOS wildcards, i.e. "?" for single characters,
+and "*" for multiple characters. Files are matched using the same rules as
+used by other DOS commands.
+
+The cursor position is selected by counting new-line (ASCII code 10)
+characters. If the editor changes the line end character sequences then the
+cursor may be positioned on the wrong line.

@@ -1,0 +1,588 @@
+File        : code.txt
+Date        : 18-Apr-98
+Author      : © A.Thoukydides, 1995-1998, 2019
+Description : Description of the support for writing extra PC side utilities
+              using the supplied files.
+    
+License     : ARMEdit is free software: you can redistribute it and/or
+              modify it under the terms of the GNU General Public License
+              as published by the Free Software Foundation, either
+              version 3 of the License, or (at your option) any later
+              version.
+
+              ARMEdit is distributed in the hope that it will be useful,
+              but WITHOUT ANY WARRANTY; without even the implied warranty
+              of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+              the GNU General Public License for more details.
+
+              You should have received a copy of the GNU General Public
+              License along with ARMEdit. If not, see
+              <http://www.gnu.org/licenses/>.
+
+
+INTRODUCTION
+
+The ARMEdit suite has been designed to allow other software to developers to
+add extra utilities to those supplied; all of the necessary files are
+included in the standard distribution.
+
+The PC side files were prepared using Borland Turbo C++ version 3.0 for DOS,
+but they use C linkage and should be compatible with other compilers. The
+source code is available on request if required for use with an incompatible
+compiler. Veneers to allow the ARMEdit SWIs to be called from C/C++ were
+assembled using Acorn ObjAsm version 3.06, and should be used in conjunction
+with Jonathan Coxhead's OSLib.
+
+
+FILES INCLUDED
+
+The following header files are included in this distribution for use on the
+PC side:
+
+    ARMFILE.H   High level routines for copying individual files between
+                DOS and RISC OS. These perform the core of the GETFILE and
+                PUTFILE utilities. They provide an easy way of transferring
+                large amounts of data between the two environments.
+
+    CLI.H       Functions to call RISC OS *commands with different levels of
+                input and output redirection.
+
+    HPC.H       An interface to Aleph One's High-level Procedure Call (HPC)
+                system. This allows the routines described in the Docs.HPC
+                file to be called directly.
+
+    SVC.H       A low level interface to the SVC calls supported by Acorn's
+                software emulator. These are used by the HPC module but may
+                be useful to other users.
+                
+    SWI.H       This provides a single function to call a RISC OS SWI by name
+                from the PC. This should not normally be used, because it is
+                very inefficient, but is useful when prototyping code.
+    
+    TALK.H      This is the main interface to the RISC OS services. It
+                provides routines for performing generally useful functions,
+                e.g. allocating and deallocating memory.
+
+    UTIL.H      A collection of useful utility functions that are used by the
+                supplied utilities. These are also used internally by the
+                WIMP module to handle error conditions.
+
+    VDU.H       Processing of VDU codes under DOS. This emulates the normal
+                RISC OS treatment of a common subset of control codes.
+
+    WIMP.H      Functions to communicate with the "!ARMEdit" front-end using
+                the messages described in the Docs.Talk file.
+
+All of the required object files to be linked with are included in a single
+library file:
+
+    ARMEDIT.LIB
+
+The following header files are included for use under RISC OS:
+
+    h.armeditswi    C interface functions to all of the SWIs provided by the
+                    ARMEdit module. See Docs.Module for details of all the
+                    SWIs.
+
+A single object file is included containing the assembled veneers:
+
+    o.armeditswi
+
+
+FUNCTIONS PROVIDED
+
+The following sections give brief descriptions of the functions provided in
+each header file. For more details read the comments in the header files
+themselves.
+
+The provided services should allow almost any operation to be performed.
+However, please get in touch if extra features would be useful - if they are
+sufficiently general they may get added in a future release of the ARMEdit
+module.
+
+
+ARMFILE.H
+
+armfile_copy_dos_riscos
+
+    Copy a file from RISC OS to DOS.
+    
+
+armfile_copy_riscos_dos
+
+    Copy a file from DOS to RISC OS.
+    
+
+armfile_translate_dos_riscos
+
+    Convert a DOS filename into a RISC OS equivalent. This performs
+    substitutions similar to those performed by DOSFS.
+
+
+armfile_translate_riscos_dos
+
+    Convert a RISC OS filename into a DOS equivalent. This performs the
+    opposite operation to armfile_translate_dos_riscos.
+
+armfile_temporary
+
+    Generate the filename for a temporary RISC OS file, and ensure it is
+    deleted before the program exits.
+
+armfile_create_dir
+
+    Create a RISC OS directory.
+
+
+CLI.H
+
+cli_simple
+
+    A simple *command interface. If output redirection is required then it
+    is performed via a file.
+    
+
+cli_redir
+
+    A more comprehensive *command interface. Both input and ouput can be
+    redirected to/from any DOS stream or file. Special action is taken if
+    the streams correspond to the keyboard or screen.
+    
+
+HPC.H
+
+hpc_message
+
+    Execute a general HPC call. If HPC support is not provided by the PC
+    front-end software then one of several substitute mechanisms is used,
+    but they only work with the ARMEdit module.
+
+
+SVC.H
+
+svc_address
+
+    Translate an 8086 address to an ARM address using SVC257 if Acorn's
+    software emulator is being used. This must not be called on any other
+    system.
+    
+
+svc_swi
+
+    Call a RISC OS SWI using SVC258 if Acorn's software emulator is being
+    used. This must not be called on any other system.
+
+
+SWI.H
+
+swi_swi
+
+    Call a specified RISC OS SWI by its name. As mentioned above this is a
+    very inefficient operation to perform, so should normally only be used
+    during development stages of new software.
+
+
+TALK.H
+
+talk_swi
+
+    Call a RISC OS SWI by number. It should be remembered that the SWI can
+    not read PC memory directly; the required data must be copied using the
+    other functions provided in the talk module.
+
+
+talk_read
+
+    Read a block of RISC OS memory.
+
+
+talk_write
+
+    Write a block of RISC OS memory.
+
+
+talk_malloc
+
+    Claimed the specified amount of RISC OS memory. The memory should be
+    released using talk_free. However, it will automatically be freed when
+    the PC card is either reset or quit; ensuring that all claimed memory
+    is eventually deallocated even if the PC software terminates abnormally.
+
+
+talk_free
+
+    Free a block of memory previously claimed using talk_malloc.
+
+
+talk_ext_to_filetype
+
+    Convert a DOS file extension into a RISC OS filetype. This uses the
+    list of mappings set by the DOSMap command. See Docs.Module for more
+    details.
+
+
+talk_filetype_to_ext
+
+    Convert a RISC OS filetype into a DOS file extension. This uses the
+    list of mappings set by the DOSMap command. See Docs.Module for more
+    details.
+
+
+talk_file_open
+
+    Open a RISC OS file. It is possible to specify that the file should
+    automatically be deleted when it is closed; useful for temporary files.
+    The file should be closed using talk_file_close. However, it will
+    automatically be closed when the PC card is either reset or quit;
+    ensuring that all files are eventually closed (and deleted if required)
+    even if the PC software terminates abnormally.
+
+
+talk_file_close
+
+    Close a RISC OS file previously opened using talk_file_open.
+
+
+talk_file_read
+
+    Read a block of memory from a RISC OS file.
+    
+
+talk_file_write
+
+    Write a block of memory to a RISC OS file.
+
+
+talk_comms_start
+
+    Register a communications client.
+
+
+talk_comms_end
+
+    Deregister a communications client.
+    
+
+talk_comms_tx
+
+    Transmit a message to another client.
+    
+
+talk_comms_rx
+
+    Receive a message from another client.
+
+
+talk_date_to_dos
+
+    Convert a date and time from RISC OS to DOS format.
+    
+
+talk_date_to_riscos
+
+    Convert a date and time from DOS to RISC OS format.
+
+
+talk_oscli_start
+
+    Start executing a RISC OS *command with both input and output redirected.
+    
+
+talk_oscli_poll
+
+    Continue the execution of a RISC OS *command.
+    
+
+talk_oscli_end
+
+    Terminate the execution of a RISC OS *command.
+
+
+talk_comms_reply
+
+    Reply to a message from another client.
+
+talk_faster
+
+    Disable multitasking for faster operations.
+
+talk_temporary
+
+    Generate a unique filename for a temporary RISC OS file.
+
+
+UTIL.H
+
+util_arm_split
+
+    Split a RISC OS path into a directory and leafname.
+
+
+util_wildcard
+
+    Call a function for all DOS files that match a wildcarded specification.
+
+
+util_arm_wildcard
+
+    Call a function for all RISC OS files that match a wildcarded
+    specification.
+
+
+util_status
+
+    Display a message replacing any previous one. A spinning activity
+    indicator may also be shown.
+
+
+util_error
+
+    Exit with an error message. This replaces any previously displayed
+    message.
+
+
+util_retry
+
+    Prompt the user to either Abort, Retry, or optionally Cancel an
+    operation.
+    
+
+util_prompt
+
+    Prompt for a Y or N answer and return the result.
+
+
+VDU.H
+
+vdu_output_filter
+
+    An output stream prefilter. This emulates RISC OS treatment of a common
+    subset of control codes.
+
+
+WIMP.H
+
+wimp_find
+
+    Send a message to obtain the current client handle of the "!ARMEdit"
+    front-end application if it is running.
+    
+
+wimp_find_receive
+
+    Attempt to receive the reply to a wimp_find message.
+    
+
+wimp_start
+
+    Send the message to start an external edit.
+
+
+wimp_start_receive
+
+    Attempt to receive the reply to a wimp_start message.
+
+
+wimp_poll
+
+    Send the message to poll the status of an external edit.
+
+
+wimp_poll_receive
+
+    Attempt to receive the reply to a wimp_poll message.
+
+
+wimp_saveas
+
+    Send the message to save a file.
+
+
+wimp_saveas_receive
+
+    Attempt to receive the reply to a wimp_saveas message.
+
+
+wimp_oscli_start
+
+    Start executing a specified *command in a TaskWindow.
+
+
+wimp_oscli_start_receive
+
+    Attempt to receive the reply to a wimp_oscli_start message.
+
+
+wimp_oscli_poll
+
+    Continue execution of a *command in a TaskWindow.
+
+
+wimp_oscli_poll_receive
+
+    Attempt to receive the reply to a wimp_oscli_poll message.
+
+
+wimp_oscli_end
+
+    Terminate execution of a *command in a TaskWindow.
+
+
+wimp_oscli_end_receive
+
+    Attempt to receive the reply to a wimp_oscli_end message.
+
+
+MESSAGE PASSING
+
+The ARMEdit module provides a general method for PC software to communicate
+with RISC OS applications or modules. The system is intentionally left
+simple; many aspects are left to users of the protocol to implement as
+required, e.g. detection and handling of problems, and the format and useage
+of different messages.
+
+The system allows multiple simultaneous clients, both under RISC OS and on
+the PC. This makes it suitable for use in multi-tasking (or task
+switching) environments such as Windows. Each client has a 4 byte ID which is
+preallocated (by me, on request) and a 4 byte dynamically allocated (by the
+ARMEdit module) handle. There are two special IDs: ID 0 is always used by PC
+software, and ID 1 is used to broadcast messages to all clients (this is
+explained in more detail below). Other IDs are allocated to different
+services being provided. If a program provides a number of distinct services,
+or if required for some other reason, it may have more than one ID. The range
+of IDs 2 to 255 may be freely used for development purposes, but must not be
+used by distributed software.
+
+When messages are sent to ID 1 they are passed to all clients which accept
+messages from the ARMEdit module (as specified when the clients register).
+This is normally only used for a few specific messages (described in the
+next section) which are useful to many clients. Other clients should not use
+this facility except under special circumstances.
+
+It is intended that each client provides a number of related services for a
+particular ID, but it is up to the authors of clients to decide how the
+message contents should be used. However, it is recommended that a service
+selector field is placed at the start of all messages.
+
+Each client has a message buffer (allocated by the ARMEdit module) used to
+transmit messages. This buffer is of a fixed size (1kB) and can only contain
+a single message. Attempting to send a message with one already in the buffer
+overwrites the earlier message, regardless of how many clients it has been
+delivered to.
+
+To enable easy implementation of servers supporting multiple clients, it is
+possible to place the message in the destination client's buffer. This should
+normally only be used by the server to reply to a message, otherwise a
+message could be overwritten.
+
+Large blocks of data should be transferred via files. This reduces the
+required memory usage and should speed up operations; to send a message from
+the PC to a WIMP task requires the PC front-end to be paged in and then the
+WIMP task to be subsequently paged in. However, transferring data to or from
+a file can all be done while the PC front-end is paged in.
+
+When a message is sent it is necessary to detect and handle non-delivery.
+Unfortunately it is not easy to detect problems since the sender and receiver
+cannot (generally) be active at the same time, and it is necessary for the PC
+front-end to be multi-tasking in a window for communication to be possible
+between PC and RISC OS tasks.
+
+The suggested approach is that after the message is sent, the program waits
+for a short time for a reply. If no reply is received then a message is
+displayed to the user prompting for the PC to be placed in multi-tasking mode
+and the relevant application to be started. The program should continue to
+poll for a reply until either successful or aborted by the user.
+
+This can be simplified in many situations to simply waiting for a reply or
+for the user to abort the operation, especially after one successful
+communication has occurred.
+
+If the PC front-end is either reset or quit then all registered PC clients
+are automatically deregistered, and any pending messages to or from them are
+discarded.
+
+
+STANDARD MESSAGES
+
+The following messages are sent by the ARMEdit module to clients which
+request them. All of the messages are sent from client ID 1. Any unrecognised
+messages should be ignored.
+
+    Reset
+    
+        Equivalent of power-on reset. This should normally be used to reset
+        any state.
+    
+        Offset  Size    Description
+        
+        0       4       Reason code = 0.
+    
+    
+    Shutdown
+    
+        The PC front-end is being quit (normal or error exit).
+        
+        Offset  Size    Description
+        
+        0       4       Reason code = 1.
+
+
+LEGAL MATTERS
+
+The "ARMEdit" header files, object files and documentation are supplied "as
+is"; no warranty, express or implied, of the merchantability of this software
+or its fitness for any particular purpose is given. In no circumstances shall
+the author, or any provider or distributor of this software, be liable for
+any damage, loss of profits, or any indirect or consequential loss arising
+out of the use of this software or inability to use this software.
+
+These files are FreeWare. Permission is granted for anyone to use them for
+the sole purpose of developing software for use with the ARMEdit suite. Any
+such software may be freely distributed, providing that use of the supplied
+files is acknowledged in the documentation.
+
+However, the ARMEdit module may only be distibuted in accordance with the
+conditions contained in the ReadMe file enclosed in this distribution.
+
+
+THINGS TO DO
+
+The following are changes that may be made to the externally available
+services sometime in the future.
+
+    None at the moment!
+
+
+VERSION HISTORY
+
+0.00 (12-Nov-95)    Original development version.
+
+0.04 (16-Dec-95)    First public development release.
+
+0.05 (17-Dec-95)    Improved filename translation.
+
+0.07 (28-Dec-95)    Added message passing protocol.
+
+1.00 (12-Jan-96)    First official release version.
+
+1.01 (11-Mar-96)    Version number updated to match the module.
+
+1.02 (06-Aug-96)    Linkage corrected for ARMFILE.H/.OBJ.
+                    Added date and time conversion routines.
+                    Placed the individual obect files in a library.
+                    Support for Acorn's software PC emulator included.
+                    Include *command interface.
+                    Provided mechanism for checking delivery of messages.
+
+1.03 (21-Feb-97)    Extended message passing to support replies.
+                    Included control over multitasking.
+                    Added ability to generate temporary filenames.
+                    Operation under Windows made more reliable.
+                    Included veneers to the ARMEdit SWIs.
+                    Added function to create a RISC OS directory.
+                    Header files reformatted to use spaces instead of tabs.
+
+1.04 (07-Dec-97)    Added ability to filter output from OSCLI functions.
+                    Included extra header files from the standard utilities.
+
+1.05 (??-???-??)    Smaller message size used to prevent data corruption.

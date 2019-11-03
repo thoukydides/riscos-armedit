@@ -1,0 +1,244 @@
+File        : talk.txt
+Date        : 18-Apr-98
+Author      : © A.Thoukydides, 1996-1998, 2019
+Description : ARMEdit messages supported by the !ARMEdit front-end.
+    
+License     : ARMEdit is free software: you can redistribute it and/or
+              modify it under the terms of the GNU General Public License
+              as published by the Free Software Foundation, either
+              version 3 of the License, or (at your option) any later
+              version.
+
+              ARMEdit is distributed in the hope that it will be useful,
+              but WITHOUT ANY WARRANTY; without even the implied warranty
+              of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+              the GNU General Public License for more details.
+
+              You should have received a copy of the GNU General Public
+              License along with ARMEdit. If not, see
+              <http://www.gnu.org/licenses/>.
+
+
+INTRODUCTION
+
+The !ARMEdit front-end supports several messages used by PC software. The
+messages are arranged in pairs: code running on the PC card sends a message,
+and the front-end sends an acknowledgement (with the same reason code). No
+messages are sent from the front-end unrequested.
+
+Messages from other sources are ignored. To test these messages from RISC OS
+software it is necessary to use an ID of 0 (the same as for PC clients).
+
+All of the messages use the ID 256.
+
+
+MSG_ARMEDIT_FIND
+
+    Check whether the front-end is running.
+    
+    Data sent:
+
+        Offset  Size    Description
+    
+        0       4       Reason code = &00000000.
+    
+    Data returned:
+    
+        Offset  Size    Description
+        
+        0       4       Reason code = &00000000.
+
+    The PC software sends this message to ID 256 to find the handle of the
+    front-end software. A timeout should be used to detect whether the
+    message has been delivered.
+    
+    All future messages should use the message handle.
+
+
+MSG_ARMEDIT_START
+
+    Start an external edit.
+    
+    Data sent:
+    
+        Offset  Size    Description
+        
+        0       4       Reason code = &00000001.
+        4       4       Byte offset of initial cursor position.
+        8       20      Null terminated DOS leaf name of file to edit.
+        28      256     Null terminated name of RISC OS file to edit.
+    
+    Data returned:
+    
+        Offset  Size    Description
+        
+        0       4       Reason code = &00000001.
+        4       4       Handle for this edit.
+
+    This message is used to start an external edit. The leaf name is used for
+    display purposes - only the RISC OS name is used to access the file
+    (which must exist when the message is sent).
+    
+    No status is returned by this message. Use MSG_ARMEDIT_POLL to check the
+    state of the edit.
+    
+    A unique handle is returned for this file. This handle should be used
+    when polling the status of the edit.
+
+
+MSG_ARMEDIT_POLL
+
+    Poll the status of the external edit.
+    
+    Data sent:
+    
+        Offset  Size    Description
+        
+        0       4       Reason code = &00000002.
+        4       4       Handle of edit to poll.
+        8       4       Flags:
+                            bit 0   Set to retrieve data.
+                            bit 1   Set to end external edit.
+                            bit 2   Set to mark file as safely saved.
+    
+    Data returned:
+    
+        Offset  Size    Description
+        
+        0       4       Reason code = &00000002.
+        4       4       Flags:
+                            bit 0   Set if file modified since last poll.
+                            bit 1   Set if external edit aborted.
+
+    This message is used to check or update the status of an external edit.
+    The input flags allow the file to be retrieved from the editor, or to
+    abandon the edit. It is also possible to mark the edit as safely saved
+    after it has been saved by the editor.
+    
+    If a request has been made to retrieve a file then the returned flags
+    should be checked until the modified flag is set.
+    
+    If the returned flags indicate that the edit has been aborted then no
+    more messages should be sent for this edit.
+
+
+MSG_ARMEDIT_SAVEAS
+
+    Display a Save As window for a specified file.
+    
+    Data sent:
+    
+        Offset  Size    Description
+        
+        0       4       Reason code = &00000003.
+        4       256     Null terminated name of RISC OS file to save.
+        260     256     Null terminated suggested name of file to save.
+    
+    Data returned:
+    
+        Offset  Size    Description
+        
+        0       4       Reason code = &00000003.
+
+    Allow a file to be saved under a user specifiable name. This is intended
+    for use by the PUTFILE command when no destination is specified. The
+    file is deleted when it has either been saved, or when the user has
+    cancelled the operation. No method for determining the success or
+    failure of the operation is provided.
+    
+
+MSG_ARMEDIT_OSCLI_START
+
+    Start executing a specified *command using a TaskWindow.
+    
+    Data sent:
+    
+        Offset  Size    Description
+        
+        0       4       Reason code = &00000004.
+        4       256     The null terminated command to execute.
+        260     256     Name of the task to create.
+
+    Data returned:
+    
+        Offset  Size    Description
+        
+        0       4       Reason code = &00000004.
+        4       4       Handle for this command.
+
+    This message is used to start a *command executing in a TaskWindow.
+    
+    A unique handle is returned for this command. This handle should be used
+    when polling or ending execution of the command.
+
+
+MSG_ARMEDIT_OSCLI_POLL
+
+    Continue execution of a *command. 
+    
+    Data sent:
+    
+        Offset  Size    Description
+        
+        0       4       Reason code = &00000005.
+        4       4       Handle of command to poll.
+        8       4       Number of bytes to input.
+        12      1000    Up to 1000 bytes of input.
+
+    Data returned:
+    
+        Offset  Size    Description
+        
+        0       4       Reason code = &00000005.
+        4       4       Status:
+                            0   Command has finished.
+                            1   Active.
+        8       4       Number of bytes to output.
+        12      1000    Up to 1000 bytes of output.
+
+    This message is used to send input or to receive any output from a
+    *command running in a TaskWindow. Both input and output is buffered as
+    required.
+    
+
+MSG_ARMEDIT_OSCLI_END
+
+    Terminate execution of a *command.
+    
+    Data sent:
+    
+        Offset  Size    Description
+        
+        0       4       Reason code = &00000006.
+        4       4       Handle of command to terminate.
+
+    Data returned:
+    
+        Offset  Size    Description
+        
+        0       4       Reason code = &00000006.
+
+    Kill the TaskWindow associated with the specified command. Any pending
+    input or output is discarded.
+
+
+THINGS TO DO
+
+The following are changes that may be made to the HPC services sometime in
+the future.
+
+    None at the moment!
+
+
+VERSION HISTORY
+
+0.00 (10-Sep-96)    Original development version.
+
+0.01 (05-Feb-97)    Cursor position in external edits can be specified.
+                    Added Save As window support.
+
+1.03 (21-Feb-97)    First official release version.
+
+1.04 (07-Dec-97)    Added support for executing a command in a TaskWindow.
+
+1.05 (??-???-??)    
